@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<odoo>
+    <!-- 
+        Copyright 2021 - ITSur - Juan Pablo Garza <jgarza@itsur.com.ar>
+        License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html). 
+    -->
+    <record id="project_task_material_view_form" model="ir.ui.view">
+        <field name="name">project.task.material.form.view</field>
+        <field name="model">project.task.material</field>
+        <field name="arch" type="xml">
+            <tree string="Material">
+                <field name="task_id" />            
+                <field name="product_id" />
+                <field name="quantity" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="project_task_material_action" model="ir.actions.act_window">
+        <field name="name">Materiales de la tarea</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">project.task.material</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('task_id', '=', active_id)]</field>
+        <field name="context">{'default_task_id': active_id}</field>
+    </record>
+
+    <record id="project_project_material_action" model="ir.actions.act_window">
+        <field name="name">Materiales de la tarea</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">project.task.material</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('project_id', '=', active_id)]</field>
+        <field name="context">{'default_project_id': active_id}</field>
+    </record>
+
+</odoo>

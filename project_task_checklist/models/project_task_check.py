@@ -1,0 +1,26 @@
+# Copyright 2021 ITSur - Juan Pablo Garza <jgarza@itsur.com.ar>
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+
+from odoo import api, fields, models
+from odoo.exceptions import ValidationError
+
+class ProjectTaskCheck(models.Model):
+    _name = "project.task.check"
+    _description = "Check List"
+    _rec_name = "description"
+
+    task_id = fields.Many2one(
+        comodel_name="project.task", string="Tarea", ondelete="cascade", required=True
+    )
+
+    project_id = fields.Many2one(string="Proyecto",related='task_id.project_id')
+
+    description = fields.Char(required=False,
+                        string="Descripción")
+
+    done = fields.Boolean(string="Completada?",
+                                default=False)
+
+    comments = fields.Char(required=False,
+                        string="Observaciones")
+
