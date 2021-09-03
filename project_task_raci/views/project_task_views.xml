@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- 
+        Copyright 2021 juanpgarza - Juan Pablo Garza <juanp@juanpgarza.com>
+        License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). 
+    -->
+    <record id="view_project_task_form_checklist" model="ir.ui.view">
+        <field name="name">project.task.form.checklist</field>
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="project.view_task_form2" />
+        <field name="arch" type="xml">
+            <field name="user_id" position="after">
+                <field name="accountable_user_id" class="o_task_user_field"/>
+                <!-- option="{'no_create_edit': False}" -->
+            </field>
+            
+            <xpath expr="//notebook" position="inside">
+                <page
+                    name="raci"
+                    string="RACI"
+                    groups="project.group_project_user"
+                >
+                    <group>
+                        <field name="consulted_user_id" class="o_task_user_field"/>
+                        <field name="informed_user_id" class="o_task_user_field"/>
+                        <field name="assignment_user_ids" invisible="1"/>
+                    </group>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>
