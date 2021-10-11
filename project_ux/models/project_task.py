@@ -7,4 +7,4 @@ from odoo import fields, models
 class Projecttask(models.Model):
     _inherit = "project.task"
 
-    task_code = fields.Char("Código")
+    task_code = fields.Char("Código", copy=True)

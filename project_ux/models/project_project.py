@@ -9,6 +9,8 @@ class Project(models.Model):
 
     project_code = fields.Char("Código")
 
+    partner_delivery_id = fields.Many2one(comodel_name="res.partner",string="Dirección de la Obra")
+
     # def action_open_view_project_form(self):
     #     view = {
     #         "name": _("Details"),

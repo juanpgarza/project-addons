@@ -12,7 +12,7 @@
             <field name="user_ids" position="attributes">
                 <attribute name="domain">[]</attribute>
             </field>
-            <field name="displayed_image_id" position="after">
+            <field name="user_ids" position="after">
                 <field name="task_code" />    
             </field>       
         </field>

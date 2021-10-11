@@ -24,6 +24,7 @@
         <field name="arch" type="xml">
             <field name="user_id" position="before">
                 <field name="project_code" />
+                <field name="partner_delivery_id" />
             </field>
         </field>
     </record>
