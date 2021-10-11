@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- 
+        Copyright 2021 juanpgarza - Juan Pablo Garza <juanp@juanpgarza.com>
+        License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). 
+    -->
+    <record id="view_project_task_form_checklist" model="ir.ui.view">
+        <field name="name">project.task.form.checklist</field>
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="project.view_task_form2" />
+        <field name="arch" type="xml">
+            <div name="button_box" position="inside">
+                <button class="oe_stat_button" 
+                        name="%(project_task_check_action)d" 
+                        type="action"
+                        groups="project.group_project_manager"
+                        icon="fa-check-square"><span class="o_stat_text">Checklist</span>
+                </button>
+            </div>        
+            <xpath expr="//notebook" position="inside">
+                <page
+                    name="checklist"
+                    string="Checklist"
+                    groups="project.group_project_user"
+                >
+                    <field name="check_ids">
+                        <tree string="Checklist" editable="bottom">
+                            <field name='sequence' widget='handle'/>
+                            <field name="description" />
+                            <field name="done" />
+                            <field name="comments" />                            
+                        </tree>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>
