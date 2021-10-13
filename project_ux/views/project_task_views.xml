@@ -9,10 +9,11 @@
         <field name="model">project.task</field>
         <field name="inherit_id" ref="project.view_task_form2" />
         <field name="arch" type="xml">
-            <field name="user_ids" position="attributes">
+            <field name="user_ids" position="attributes">                
                 <attribute name="domain">[]</attribute>
             </field>
             <field name="user_ids" position="after">
+                <field name="supervisor_user_id" class="o_task_user_field"/>
                 <field name="task_code" />    
             </field>       
         </field>

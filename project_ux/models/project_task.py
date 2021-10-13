@@ -8,3 +8,5 @@ class Projecttask(models.Model):
     _inherit = "project.task"
 
     task_code = fields.Char("Código", copy=True)
+
+    supervisor_user_id = fields.Many2one('res.users', string='Supervisor', tracking=True)
