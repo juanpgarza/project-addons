@@ -2,7 +2,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 {
-    "name": "Project Task Checklist",
+    "name": "Project Milestone",
     "summary": "",
     "version": "15.0.1.0.0",
     "category": "Project",
