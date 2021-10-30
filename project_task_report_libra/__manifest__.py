@@ -12,6 +12,7 @@
     "depends": [
         "project",
         "project_task_checklist",
+        "project_task_code",
         ],
     "data": [
         "views/project_task_report.xml",
