@@ -4,7 +4,7 @@
         <t t-call="web.html_container">
             <t t-foreach="docs" t-as="o">
                 <t t-call="web.external_layout">
-                    <t t-set="o" t-value="o.with_context(lang=o.partner_id.lang)"/>
+                    <t t-set="o" t-value="o.with_context(lang=o.project_id.partner_id.lang)"/>
                     <div class="page" style="font-size: 10pt;font-family:Helvetica,Verdana,Arial,sans,Lucida Grande,Calibri;">
                         
                         <div class="oe_structure"/>
@@ -39,6 +39,14 @@
                             <div class="col-auto mw-100 mb-6">
                                 <strong>Dirección de la obra</strong>:
                                 <span t-field="o.project_id.partner_delivery_id.street"/>
+                            </div>
+                        </div>
+                        <hr/>
+                        <!-- Linea 4 -->
+                        <div class="row mt4 mb4" t-if="o.description">
+                            <div class="col-auto mw-100 mb-12">
+                                <strong>Descripción</strong><br/>
+                                <span t-field="o.description"/>
                             </div>
                         </div>
                         <hr/>
