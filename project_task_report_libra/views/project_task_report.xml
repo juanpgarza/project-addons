@@ -18,9 +18,15 @@
                             </div>
                             <div class="col-auto mw-100 mb-6">
                                 <strong>Fecha</strong>:
-                                <span t-field="o.date_deadline"/>
+                                <span t-field="o.planned_date_begin"/>
                             </div>
                         </div>
+                        <div class="row mt4 mb4">
+                            <div class="col-auto mw-100 mb-6">
+                                <strong>Responsables: </strong>:
+                                <span t-field="o.user_ids"/>
+                            </div>
+                        </div>                        
                         <hr/>
                         <!-- Linea 2 -->
                         <div class="row mt4 mb4">
@@ -34,13 +40,23 @@
                             </div>
                         </div>
     
-                        <!-- Linea 3 -->
+                        <!-- Linea-->
                         <div class="row mt4 mb4">
                             <div class="col-auto mw-100 mb-6">
                                 <strong>Dirección de la obra</strong>:
                                 <span t-field="o.project_id.partner_delivery_id.street"/>
                             </div>
+                            <div class="col-auto mw-100 mb-6">
+                                <strong>Móvil (dir. de la obra)</strong>:
+                                <span t-field="o.project_id.partner_delivery_id.mobile"/>
+                            </div>                            
                         </div>
+                        <div class="row mt4 mb4">
+                            <div class="col-auto mw-100 mb-12">
+                                <strong>Notas internas (dir. de la obra)</strong>:
+                                <span t-field="o.project_id.partner_delivery_id.comment"/>
+                            </div>                           
+                        </div>                        
                         <hr/>
                         <!-- Linea 4 -->
                         <div class="row mt4 mb4" t-if="o.description">
