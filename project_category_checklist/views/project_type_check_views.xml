@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<odoo>
+    <!-- 
+        Copyright 2021 juanpgarza - Juan Pablo Garza <juanp@juanpgarza.com>
+        License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+    -->
+    <record id="project_type_check_view_tree" model="ir.ui.view">
+        <field name="name">project.type.check.tree.view</field>
+        <field name="model">project.type.check</field>
+        <field name="arch" type="xml">
+            <tree string="check" editable="bottom" multi_edit="1" >
+                <field name="type_id" />            
+                <field name="description" />
+                <field name="done" />
+                <field name="comments" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="action_project_type_check" model="ir.actions.act_window">
+        <field name="name">Checklist por Tipo de tarea</field>
+        <field name="res_model">project.type.check</field>
+        <field name="view_mode">tree</field>
+    </record>
+
+    <menuitem
+        name="Checklist por Tipo de tarea"
+        id="project_category_check"
+        parent="project.menu_project_config"
+        action="action_project_type_check"
+        sequence="21"
+    />
+
+    <!-- <record id="project_type_check_action" model="ir.actions.act_window">
+        <field name="name">Checklist</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">project.type.check</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('type_id', '=', active_id)]</field>
+        <field name="context">{'default_type_id': active_id}</field>
+    </record>
+
+    <record id="project_project_check_action" model="ir.actions.act_window">
+        <field name="name">Checklist</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">project.type.check</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('project_id', '=', active_id)]</field>
+        <field name="context">{'default_project_id': active_id}</field>
+    </record> -->
+
+</odoo>

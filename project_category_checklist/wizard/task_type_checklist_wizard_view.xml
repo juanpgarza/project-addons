@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- 
+        Copyright 2021 juanpgarza - Juan Pablo Garza <juanp@juanpgarza.com>
+        License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). 
+    -->
+    <record id="view_task_type_checklist_wizard" model="ir.ui.view">
+        <field name="name">Cambiar tipo de tarea</field>
+        <field name="model">task.type.checklist.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <group>
+                        <field name="task_id" readonly="1" />
+                        <field name="type_id" />
+                    </group>
+                </group>
+                <footer>
+                    <button type="object" name="do_change_type"
+                    string="Confirmar" confirm="Se borrará el checklist actual. ¿Esta seguro que desea continuar?" class="oe_highlight" />
+                    <button special="cancel" string="Cancelar"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>
