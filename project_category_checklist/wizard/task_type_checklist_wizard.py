@@ -19,22 +19,9 @@ class TaskTypeChecklistWizard(models.TransientModel):
     def do_change_type(self):
 
         self.task_id.check_ids.unlink()
-
-        task_check = self.env["project.task.check"]
-
-        checklist_items = self.env["project.type.check"].search([("type_id","=",self.type_id.id)])
-
-        for rec in checklist_items:
-            vals = {
-                'project_id': self.task_id.project_id.id,
-                'task_id': self.task_id.id,
-                'description': rec.description,
-                'done': rec.done,
-                'comments': rec.comments
-            }
-
-            task_check.create(vals)
-        
+       
         self.task_id.type_id = self.type_id
+
+        self.task_id.generate_type_checklist(self.task_id)
 
         return
