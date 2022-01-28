@@ -24,6 +24,7 @@
                 <field name="type_id" />
                 <field name="type_id_sequence" />
                 <field name="planned_date_begin" widget="date" />
+                <field name="type_id_dias_proxima_etapa"/>                
                 <field name="fecha_estimada_proxima_tarea" />                                
             </field>
         </field>
