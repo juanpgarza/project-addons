@@ -9,9 +9,9 @@
         <field name="inherit_id" ref="project.view_task_form2" />
         <field name="arch" type="xml">
             <field name="date_deadline" position="after">
-                <field name="fecha_estimada_inicio" />
+                <field name="fecha_estimada_inicio" readonly="1" />
                 <field name="type_id_dias_proxima_etapa"/>                
-                <field name="fecha_estimada_proxima_tarea" />                                
+                <field name="fecha_estimada_proxima_tarea" readonly="1" />                                
             </field>
         </field>
     </record>
@@ -26,9 +26,9 @@
                 <field name="type_id" />
                 <field name="type_id_sequence" />
                 <field name="planned_date_begin" widget="date" />
-                <field name="fecha_estimada_inicio" />
+                <field name="fecha_estimada_inicio" readonly="1" />
                 <field name="type_id_dias_proxima_etapa"/>                
-                <field name="fecha_estimada_proxima_tarea" />                                
+                <field name="fecha_estimada_proxima_tarea" readonly="1" />                                
             </field>
         </field>
     </record> 

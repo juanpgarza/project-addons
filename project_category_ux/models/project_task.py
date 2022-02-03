@@ -10,7 +10,7 @@ class ProjectTask(models.Model):
 
     type_id_sequence = fields.Integer(string="Secuencia", related="type_id.sequence", store=True)
 
-    type_id_dias_proxima_etapa = fields.Integer(string="Días est. próxima etapa", related="type_id.dias_estimados_nodo_siguiente")
+    type_id_dias_proxima_etapa = fields.Integer(string="Días est. próxima tarea", related="type_id.dias_estimados_nodo_siguiente")
 
     fecha_estimada_proxima_tarea = fields.Date()
 

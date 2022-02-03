@@ -15,6 +15,7 @@ class Project(models.Model):
     fecha_estimada_inicio = fields.Date(related="tarea_actual_id.fecha_estimada_inicio")
     type_id_dias_proxima_etapa = fields.Integer(related="tarea_actual_id.type_id_dias_proxima_etapa")
     fecha_estimada_proxima_tarea = fields.Date(related="tarea_actual_id.fecha_estimada_proxima_tarea")
+    tarea_actual_stage_id = fields.Many2one(string="Estado tarea actual", related="tarea_actual_id.stage_id")
 
     def calcular_fechas_estimadas(self):
         for rec in self:

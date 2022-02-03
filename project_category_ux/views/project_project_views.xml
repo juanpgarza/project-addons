@@ -19,6 +19,7 @@
                         <field name="fecha_estimada_inicio" />
                         <field name="type_id_dias_proxima_etapa" />
                         <field name="fecha_estimada_proxima_tarea" />
+                        <field name="tarea_actual_stage_id" />
                     </group>                
                 </page>                
             </xpath>            
@@ -35,6 +36,7 @@
                 <field name="fecha_estimada_inicio" />
                 <field name="type_id_dias_proxima_etapa" />
                 <field name="fecha_estimada_proxima_tarea" />
+                <field name="tarea_actual_stage_id" />                
             </field>
         </field>
     </record>
