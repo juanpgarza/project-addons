@@ -16,6 +16,7 @@
                 >
                     <group>
                         <field name="tarea_actual_id" />
+                        <field name="type_tarea_actual_id" />                        
                         <field name="fecha_estimada_inicio" />
                         <field name="type_id_dias_proxima_etapa" />
                         <field name="fecha_estimada_proxima_tarea" />
@@ -33,6 +34,7 @@
         <field name="arch" type="xml">
             <field name="stage_id" position="after">
                 <field name="tarea_actual_id" />
+                <field name="type_tarea_actual_id" />
                 <field name="fecha_estimada_inicio" />
                 <field name="type_id_dias_proxima_etapa" />
                 <field name="fecha_estimada_proxima_tarea" />

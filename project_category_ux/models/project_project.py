@@ -12,6 +12,13 @@ class Project(models.Model):
                         compute="_compute_tarea_actual",
                         store=True)
 
+    type_tarea_actual_id = fields.Many2one(
+                        comodel_name="project.type", 
+                        string="Tipo tarea actual", 
+                        compute="_compute_tarea_actual",
+                        store=True
+    )
+
     fecha_estimada_inicio = fields.Date(related="tarea_actual_id.fecha_estimada_inicio")
     type_id_dias_proxima_etapa = fields.Integer(related="tarea_actual_id.type_id_dias_proxima_etapa")
     fecha_estimada_proxima_tarea = fields.Date(related="tarea_actual_id.fecha_estimada_proxima_tarea")
@@ -37,5 +44,7 @@ class Project(models.Model):
             tareas_ordenadas = rec.task_ids.filtered(lambda x: x.planned_date_begin).sorted('type_id_sequence', reverse=True)
             if tareas_ordenadas:
                 rec.tarea_actual_id = tareas_ordenadas[0]
+                rec.type_tarea_actual_id = tareas_ordenadas[0].type_id
             else:
                 rec.tarea_actual_id = False
+                rec.type_tarea_actual_id = False
