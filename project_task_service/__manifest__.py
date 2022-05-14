@@ -12,7 +12,6 @@
     "depends": [
         "project",
         "sale",
-        "sale_timesheet",
         ],
     "data": [
         # "views/project_project_views.xml",        
