@@ -2,8 +2,8 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 {
-    "name": "Project Task Service",
-    "summary": "Project Task Service",
+    "name": "Project TSM",
+    "summary": "Project TSM",
     "version": "15.0.1.0.0",
     "category": "Project",
     "website": "https://github.com/juanpgarza/project-addons",

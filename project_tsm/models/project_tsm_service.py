@@ -30,9 +30,10 @@ class ProjectTSMService(models.Model):
                                         domain="[('detailed_type','=','service')]",
                                         )
 
-    product_uom_qty = fields.Integer(string="Cant. pedida",default=1)
+    product_uom_qty = fields.Float(string="Cant. pedida",
+                                )
 
-    qty_delivered = fields.Integer(string="Cant. ejecutada",default=0)
+    qty_delivered = fields.Float(string="Cant. ejecutada",default=0)
 
     user_id = fields.Many2one(
                             'res.users', 
