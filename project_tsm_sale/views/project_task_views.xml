@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- 
+        Copyright 2022 juanpgarza - Juan Pablo Garza <juanp@juanpgarza.com>
+        License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). 
+    -->
+    <record id="view_task_form2" model="ir.ui.view">
+        <field name="name">project.task.form.service</field>
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="project_tsm.view_task_form2" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='service_ids']/tree/field[@name='product_template_id']" position="before">
+                <field name="sale_order_id" invisible="1" required="1"/>
+                <field name="so_line" />
+            </xpath>
+
+            <xpath expr="//field[@name='service_ids']/tree/field[@name='product_template_id']" position="attributes">
+                <attribute name="optional">hide</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='service_ids']/tree/field[@name='user_id']" position="attributes">
+                <attribute name="required">1</attribute>
+            </xpath>
+
+            <!-- <xpath expr="//field[@name='timesheet_ids']/tree/field[@name='unit_amount']" position="before">
+                <field name="timesheet_invoice_id" invisible="1"/>
+                <field name="so_line" attrs="{'column_invisible': [('parent.allow_billable', '=', False)]}" context="{'with_remaining_hours': True, 'with_price_unit': True}" options="{'no_create': True, 'no_open': True}" domain="[('is_service', '=', True), ('order_partner_id', 'child_of', parent.commercial_partner_id), ('is_expense', '=', False), ('state', 'in', ['sale', 'done'])]" optional="hide"/>
+            </xpath> -->
+        </field>
+    </record>
+
+</odoo>
