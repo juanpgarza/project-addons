@@ -9,12 +9,12 @@ class ProjectTSMService(models.Model):
 
     # partner_id = fields.Many2one(related='task_id.partner_id')
 
-    sale_order_id = fields.Many2one(related='task_id.sale_order_id')
+    sale_order_id = fields.Many2one(related='task_id.sale_order_id', tracking=True, string="Pedido de venta")
 
     user_id = fields.Many2one(required=True)
 
     so_line = fields.Many2one('sale.order.line', 
-                    string='Sales Order Item', 
+                    string='Línea de pedido', 
                     # compute="_compute_so_line", 
                     # store=True, 
                     # readonly=False, 
@@ -30,12 +30,16 @@ class ProjectTSMService(models.Model):
                                     readonly=True,    
                                         )
 
-    # account_stage = fields.Selection([
-    #         ("review", "Pendiente de aprobación"),
-    #         ("approved", "Aprobado"),
-    #         ("invoiced", "Facturado"),
-    #     ],
-    #     default="review")
+    account_stage = fields.Selection([
+            ("review", "Pendiente de aprobación"),
+            ("approved", "Aprobado"),
+            # ("invoiced", "Facturado"),
+        ],
+        default="review",
+        string="Estado",
+        readonly=True,
+        tracking=True,
+        )
 
     # @api.depends('task_id.sale_line_id', 'project_id.sale_line_id', 'employee_id', 'project_id.allow_billable')
     # @api.depends('task_id.sale_line_id')
@@ -46,3 +50,19 @@ class ProjectTSMService(models.Model):
     def _compute_product_template_id(self):
         for rec in self:
             rec.product_template_id = rec.so_line.product_template_id
+
+    def action_set_approved(self):
+        for rec in self:
+            rec.write(
+                {
+                    'account_stage': "approved"
+                }
+            )
+
+    def action_set_review(self):
+        for rec in self:
+            rec.write(
+                {
+                    'account_stage': "review"
+                }
+            )

@@ -16,7 +16,8 @@
         ],
     "data": [
         # "views/project_project_views.xml",        
-        "views/project_tsm_service_views.xml",        
+        "data/ir_actions_server.xml",        
+        "views/project_tsm_service_views.xml", 
         "views/project_task_views.xml",
         'security/ir.model.access.csv',        
         ],

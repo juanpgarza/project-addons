@@ -15,7 +15,27 @@
             </field>
             <field name="product_template_id" position="attributes">
                 <attribute name="optional">hide</attribute>
-            </field>            
+            </field>
+            <field name="delivered_date" position="after">
+                <field name="account_stage" />
+            </field>
+        </field>
+    </record>
+
+    <record id="project_task_service_view_form" model="ir.ui.view">
+        <field name="name">project.tsm.service.form.view</field>
+        <field name="model">project.tsm.service</field>
+        <field name="inherit_id" ref="project_tsm.project_task_service_view_form" />        
+        <field name="arch" type="xml">
+
+            <field name="product_template_id" position="before">
+                <field name="sale_order_id" />
+                <field name="so_line" />
+            </field>         
+            <xpath expr="//header" position="inside">
+                <field name="account_stage" widget="statusbar" statusbar_visible="review,approved" nolabel="1" />
+            </xpath>
+
         </field>
     </record>
 
