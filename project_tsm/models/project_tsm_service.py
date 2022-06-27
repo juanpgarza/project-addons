@@ -8,6 +8,7 @@ class ProjectTSMService(models.Model):
     _name = 'project.tsm.service'
     _description = 'Servicios'
     _rec_name = "product_template_id"
+    _inherit = ['mail.thread', 'mail.activity.mixin']
 
     # project_id = fields.Many2one(string='',related='task_id.project_id')
 
@@ -26,18 +27,21 @@ class ProjectTSMService(models.Model):
 
     product_template_id = fields.Many2one(comodel_name="product.template",
                                         ondelete="restrict",
-                                        string="servicio",
+                                        string="Servicio",
                                         domain="[('detailed_type','=','service')]",
                                         )
 
     product_uom_qty = fields.Float(string="Cant. pedida",
                                 )
 
-    qty_delivered = fields.Float(string="Cant. ejecutada",default=0)
+    qty_delivered = fields.Float(string="Cant. ejecutada",
+                                tracking=True,
+                                default=0)
 
     user_id = fields.Many2one(
                             'res.users', 
-                            string='Usuario', 
+                            string='Usuario',
+                            tracking=True,
                             # default=lambda self:self._default_user_id(),
                             )
 
