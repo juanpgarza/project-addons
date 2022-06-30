@@ -9,6 +9,7 @@
         <field name="model">project.tsm.service</field>
         <field name="arch" type="xml">
             <tree string="Servicios">
+                <field name="task_id" />
                 <field name="product_template_id" />
                 <field name="product_uom_qty" />
                 <field name="qty_delivered" />
@@ -27,6 +28,7 @@
                 <sheet>
                     <div class="oe_button_box" name="button_box" />
                     <group>
+                        <field name="task_id" />
                         <field name="product_template_id" />
                         <field name="product_uom_qty" />
                         <field name="qty_delivered" />
