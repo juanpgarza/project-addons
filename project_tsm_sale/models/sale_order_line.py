@@ -7,10 +7,22 @@ from odoo import _, api, fields, models
 class SaleOrderLine(models.Model):
     _inherit = "sale.order.line"
 
+    qty_delivered_method = fields.Selection(selection_add=[('project_task', 'Tareas en proyectos')])
+
     # src/addons-OCA/field-service/fieldservice_sale/models/sale_order_line.py
-    @api.depends("task_id.service_ids.qty_delivered")
+    @api.depends("task_id.service_ids.qty_delivered","task_id.service_ids.account_stage")
     def _compute_qty_delivered(self):
         super(SaleOrderLine, self)._compute_qty_delivered()
-        # falta que filtre solo las líneas que tienen un metodo de entrega específico (ej. planilla de servicios en el proyecto)
-        for rec in self:
+        # import pdb; pdb.set_trace()
+        for rec in self.filtered(lambda sol: sol.qty_delivered_method == 'project_task'):
             rec.qty_delivered = sum(rec.task_id.service_ids.filtered(lambda x: x.so_line == rec and x.account_stage == 'approved').mapped("qty_delivered"))
+
+    # src/addons/sale_timesheet/models/sale_order.py:203
+    # src/addons/sale/models/sale_order_line.py:323
+    @api.depends('product_id')
+    def _compute_qty_delivered_method(self):
+        super(SaleOrderLine, self)._compute_qty_delivered_method()
+        for line in self:            
+            if not line.is_expense and line.product_template_id.type == 'service' and line.product_template_id.service_type == 'project_task':
+                line.qty_delivered_method = 'project_task'
+                # import pdb; pdb.set_trace()

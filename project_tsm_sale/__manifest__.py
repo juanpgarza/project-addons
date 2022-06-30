@@ -15,10 +15,12 @@
         "project_tsm"
         ],
     "data": [
-        # "views/project_project_views.xml",        
+        "views/product_template_views.xml",        
         "data/ir_actions_server.xml",        
         "views/project_tsm_service_views.xml", 
         "views/project_task_views.xml",
+        "views/sale_order_line_views.xml",
+        "views/sale_order_views.xml",        
         'security/ir.model.access.csv',        
         ],
     "installable": True,
