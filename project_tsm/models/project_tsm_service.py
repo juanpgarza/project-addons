@@ -10,7 +10,7 @@ class ProjectTSMService(models.Model):
     _rec_name = "product_template_id"
     _inherit = ['mail.thread', 'mail.activity.mixin']
 
-    # project_id = fields.Many2one(string='',related='task_id.project_id')
+    project_id = fields.Many2one(string='',related='task_id.project_id')
 
     # def _default_user_id(self):
     #     import pdb; pdb.set_trace()
@@ -47,6 +47,17 @@ class ProjectTSMService(models.Model):
 
     delivered_date = fields.Date(string="Fecha ejecución")
 
+    state = fields.Selection([
+            ("draft", "Pendiente de realizar"),
+            ("done", "Realizado"),
+            ("approved", "Aprobado"),
+        ],
+        default="draft",
+        string="Estado",
+        readonly=True,
+        tracking=True,
+        )
+
     # def write(self, vals):
     #     import pdb; pdb.set_trace()
     #     if 'user_id' in vals and not vals["user_id"]:
@@ -62,3 +73,27 @@ class ProjectTSMService(models.Model):
         if not service_id.user_id:
             service_id.user_id = service_id.task_id.user_ids[0]
         return service_id
+
+    def action_set_draft(self):
+        for rec in self:
+            rec.write(
+                {
+                    'state': "draft"
+                }
+            )
+
+    def action_set_approved(self):
+        for rec in self:
+            rec.write(
+                {
+                    'state': "approved"
+                }
+            )
+
+    def action_set_done(self):
+        for rec in self:
+            rec.write(
+                {
+                    'state': "done"
+                }
+            )

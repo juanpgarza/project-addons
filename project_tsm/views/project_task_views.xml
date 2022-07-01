@@ -25,7 +25,8 @@
                             <field name="product_uom_qty" />
                             <field name="qty_delivered" />
                             <field name="user_id" />
-                            <field name="delivered_date" />                                                        
+                            <field name="delivered_date" />
+                            <field name="state" />
                         </tree>
                     </field>
                 </page>            

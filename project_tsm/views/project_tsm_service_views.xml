@@ -8,13 +8,14 @@
         <field name="name">project.tsm.service.tree.view</field>
         <field name="model">project.tsm.service</field>
         <field name="arch" type="xml">
-            <tree string="Servicios">
+            <tree string="Servicios" create="false">
                 <field name="task_id" />
                 <field name="product_template_id" />
                 <field name="product_uom_qty" />
                 <field name="qty_delivered" />
                 <field name="user_id" />
                 <field name="delivered_date" /> 
+                <field name="state" />
             </tree>
         </field>
     </record>
@@ -23,8 +24,10 @@
         <field name="name">project.tsm.service.form.view</field>
         <field name="model">project.tsm.service</field>
         <field name="arch" type="xml">
-            <form string="Servicios">
-                <header />
+            <form string="Servicios" create="false" edit="false">
+                <header>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,done,approved" />
+                </header>
                 <sheet>
                     <div class="oe_button_box" name="button_box" />
                     <group>
@@ -33,7 +36,7 @@
                         <field name="product_uom_qty" />
                         <field name="qty_delivered" />
                         <field name="user_id" />
-                        <field name="delivered_date" /> 
+                        <field name="delivered_date" />
                     </group>
                 </sheet>    
                 <div class="oe_chatter">
@@ -54,13 +57,13 @@
         <field name="context">{'default_task_id': active_id}</field>
     </record>
 
-    <!-- <record id="project_project_service_action" model="ir.actions.act_window">
+    <record id="project_project_service_action" model="ir.actions.act_window">
         <field name="name">Servicios del projecto</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">project.tsm.service</field>
         <field name="view_mode">tree,form</field>
         <field name="domain">[('project_id', '=', active_id)]</field>
         <field name="context">{'default_project_id': active_id}</field>
-    </record> -->
+    </record>
 
 </odoo>
