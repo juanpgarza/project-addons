@@ -11,20 +11,21 @@
         <field name="arch" type="xml">
             <xpath expr="//field[@name='service_ids']/tree/field[@name='product_template_id']" position="before">
                 <field name="sale_order_id" invisible="1" required="1"/>
-                <field name="so_line" />
+                <field name="so_line" attrs="{'required': [('product_template_id', '==', False)]}" />
             </xpath>
 
             <xpath expr="//field[@name='service_ids']/tree/field[@name='product_template_id']" position="attributes">
-                <attribute name="optional">hide</attribute>
+                <attribute name="attrs">{'readonly': [('so_line', '!=', False)]}</attribute>
+                <attribute name="force_save">1</attribute>
             </xpath>
 
             <xpath expr="//field[@name='service_ids']/tree/field[@name='user_id']" position="attributes">
                 <attribute name="required">1</attribute>
             </xpath>
 
-            <xpath expr="//field[@name='service_ids']/tree/field[@name='delivered_date']" position="after">
+            <!-- <xpath expr="//field[@name='service_ids']/tree/field[@name='delivered_date']" position="after">
                 <field name="account_stage" />
-            </xpath>
+            </xpath> -->
 
             <!-- <xpath expr="//field[@name='timesheet_ids']/tree/field[@name='unit_amount']" position="before">
                 <field name="timesheet_invoice_id" invisible="1"/>

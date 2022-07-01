@@ -16,9 +16,6 @@
             <field name="product_template_id" position="attributes">
                 <attribute name="optional">hide</attribute>
             </field>
-            <field name="delivered_date" position="after">
-                <field name="account_stage" />
-            </field>
         </field>
     </record>
 
@@ -31,11 +28,7 @@
             <field name="product_template_id" position="before">
                 <field name="sale_order_id" />
                 <field name="so_line" />
-            </field>         
-            <xpath expr="//header" position="inside">
-                <field name="account_stage" widget="statusbar" statusbar_visible="review,approved" nolabel="1" />
-            </xpath>
-
+            </field>
         </field>
     </record>
 

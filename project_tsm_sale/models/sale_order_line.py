@@ -10,12 +10,12 @@ class SaleOrderLine(models.Model):
     qty_delivered_method = fields.Selection(selection_add=[('project_task', 'Tareas en proyectos')])
 
     # src/addons-OCA/field-service/fieldservice_sale/models/sale_order_line.py
-    @api.depends("task_id.service_ids.qty_delivered","task_id.service_ids.account_stage")
+    @api.depends("task_id.service_ids.qty_delivered","task_id.service_ids.state")
     def _compute_qty_delivered(self):
         super(SaleOrderLine, self)._compute_qty_delivered()
         # import pdb; pdb.set_trace()
         for rec in self.filtered(lambda sol: sol.qty_delivered_method == 'project_task'):
-            rec.qty_delivered = sum(rec.task_id.service_ids.filtered(lambda x: x.so_line == rec and x.account_stage == 'approved').mapped("qty_delivered"))
+            rec.qty_delivered = sum(rec.task_id.service_ids.filtered(lambda x: x.so_line == rec and x.state == 'approved').mapped("qty_delivered"))
 
     # src/addons/sale_timesheet/models/sale_order.py:203
     # src/addons/sale/models/sale_order_line.py:323

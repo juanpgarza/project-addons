@@ -1,18 +1,4 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <record id="action_server_set_approved" model="ir.actions.server">
-        <field name="name">Marcar como "Aprobado"</field>
-        <field name="model_id" ref="project_tsm.model_project_tsm_service" />
-        <field name="binding_model_id" ref="project_tsm.model_project_tsm_service" />
-        <field name="state">code</field>
-        <field name="code">action = records.action_set_approved()</field>
-    </record>
 
-    <record id="action_server_set_review" model="ir.actions.server">
-        <field name="name">Marcar como "Pendiente de aprobación"</field>
-        <field name="model_id" ref="project_tsm.model_project_tsm_service" />
-        <field name="binding_model_id" ref="project_tsm.model_project_tsm_service" />
-        <field name="state">code</field>
-        <field name="code">action = records.action_set_review()</field>
-    </record>
 </odoo>

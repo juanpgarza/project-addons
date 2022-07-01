@@ -18,16 +18,12 @@ class ProjectTSMService(models.Model):
                     # compute="_compute_so_line", 
                     # store=True, 
                     # readonly=False, 
-                    required=True,
+                    # required=True,
                     domain="[('is_service', '=', True), ('is_expense', '=', False), ('state', 'in', ['sale', 'done']), ('order_id', '=', sale_order_id)]",
                     )
 
-    product_template_id = fields.Many2one(compute="_compute_product_template_id",
-                                        readonly=True,
-                                        )
-
     product_uom_qty = fields.Float(related='so_line.product_uom_qty',
-                                    readonly=True,    
+                                    # readonly=True,    
                                         )
 
     account_stage = fields.Selection([
@@ -36,7 +32,7 @@ class ProjectTSMService(models.Model):
             # ("invoiced", "Facturado"),
         ],
         default="review",
-        string="Estado",
+        string="Estado Facturación",
         readonly=True,
         tracking=True,
         )
@@ -50,19 +46,12 @@ class ProjectTSMService(models.Model):
     def _compute_product_template_id(self):
         for rec in self:
             rec.product_template_id = rec.so_line.product_template_id
-
-    def action_set_approved(self):
-        for rec in self:
-            rec.write(
-                {
-                    'account_stage': "approved"
-                }
-            )
-
-    def action_set_review(self):
-        for rec in self:
-            rec.write(
-                {
-                    'account_stage': "review"
-                }
-            )
+    
+    @api.onchange("so_line")
+    def _onchange_so_line(self):
+        if self.so_line:
+            self.product_template_id = self.so_line.product_template_id
+        else:
+            self.product_template_id = False
+        # import pdb; pdb.set_trace()
+        # return True
