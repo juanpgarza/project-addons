@@ -12,7 +12,8 @@
     "depends": [
         "project",
         "sale_project",
-        "project_tsm_sale"
+        "project_tsm",        
+        "project_tsm_sale",
         ],
     "data": [
         # "views/project_project_views.xml",        

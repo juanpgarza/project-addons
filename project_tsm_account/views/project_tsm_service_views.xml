@@ -18,11 +18,21 @@
                 </button>
             </div>
 
-            <field name="account_stage" position="attributes">
-                <attribute name="statusbar_visible">review,approved,invoiced</attribute>
-            </field>
-
         </field>
     </record>
+
+    <record id="task_service_action" model="ir.actions.act_window">
+        <field name="name">Servicios de terceros</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">project.tsm.service</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_task_service" 
+    name="Servicios de terceros"
+    parent="account.menu_finance_payables"
+    action="task_service_action"
+    sequence="200"
+    groups="account.group_account_invoice"/>
 
 </odoo>
