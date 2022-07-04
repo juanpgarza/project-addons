@@ -3,6 +3,7 @@
 
 from odoo import fields, models, api
 from odoo.exceptions import UserError
+from odoo.tools.float_utils import float_compare, float_is_zero, float_round
 
 class ProjectTSMService(models.Model):
     _inherit = "project.tsm.service"
@@ -11,7 +12,58 @@ class ProjectTSMService(models.Model):
                     ("invoiced", "Facturado"),
         ])
      
-    invoice_line_id = fields.Many2one('account.move.line', string='Línea de factura')
+    invoice_line_ids = fields.One2many('account.move.line', 'tsm_service_id', string='Línea de factura', readonly=True, copy=False)
+    qty_invoiced = fields.Float(compute='_compute_qty_invoiced', string="Facturado", digits='Product Unit of Measure', store=True)
+    qty_to_invoice = fields.Float(compute='_compute_qty_invoiced', string='A facturar', store=True, readonly=True,
+                                  digits='Product Unit of Measure')
+
+    product_uom = fields.Many2one(related='product_template_id.uom_id')
+
+    invoice_status = fields.Selection([
+        ('no', 'Nada para facturar'),
+        ('to invoice', 'Para facturar'),
+        ('invoiced', 'Totalmente Facturado'),
+    ], string='Estado de facturación', compute='_get_invoiced', store=True, readonly=True, copy=False, default='no',tracking=True,)
+
+    @api.depends('qty_to_invoice')
+    def _get_invoiced(self):
+        precision = self.env['decimal.precision'].precision_get('Product Unit of Measure')
+        for service in self:
+            if service.state != 'approved':
+                service.invoice_status = 'no'
+                continue
+
+            if not float_is_zero(service.qty_to_invoice, precision_digits=precision):
+                service.invoice_status = 'to invoice'
+            else:
+                service.invoice_status = 'invoiced'
+
+    @api.depends('invoice_line_ids.move_id.state', 'invoice_line_ids.quantity')
+    def _compute_qty_invoiced(self):
+        for line in self:
+            # compute qty_invoiced
+            qty = 0.0
+            for inv_line in line._get_invoice_lines():
+                if inv_line.move_id.state not in ['cancel']:
+                    if inv_line.move_id.move_type == 'in_invoice':
+                        qty += inv_line.product_uom_id._compute_quantity(inv_line.quantity, line.product_uom)
+                    elif inv_line.move_id.move_type == 'in_refund':
+                        qty -= inv_line.product_uom_id._compute_quantity(inv_line.quantity, line.product_uom)
+            line.qty_invoiced = qty
+
+            if line.state == 'approved':
+                line.qty_to_invoice = line.qty_delivered - line.qty_invoiced
+            else:
+                line.qty_to_invoice = 0
+
+    def _get_invoice_lines(self):
+        self.ensure_one()
+        if self._context.get('accrual_entry_date'):
+            return self.invoice_line_ids.filtered(
+                lambda l: l.move_id.invoice_date and l.move_id.invoice_date <= self._context['accrual_entry_date']
+            )
+        else:
+            return self.invoice_line_ids
 
     def action_create_bill(self):
         for rec in self:
@@ -58,24 +110,23 @@ class ProjectTSMService(models.Model):
 
         # return True
     
-    def action_view_bill(self):
+    # src/addons/purchase/models/purchase.py:599
+    def action_view_invoice(self):
+        # import pdb; pdb.set_trace()
+        invoices = self.invoice_line_ids.mapped("move_id")
+        result = self.env['ir.actions.act_window']._for_xml_id('account.action_move_in_invoice_type')
+        # choose the view_mode accordingly
+        if len(invoices) > 1:
+            result['domain'] = [('id', 'in', invoices.ids)]
+        elif len(invoices) == 1:
+            res = self.env.ref('account.view_move_form', False)
+            form_view = [(res and res.id or False, 'form')]
+            if 'views' in result:
+                result['views'] = form_view + [(state, view) for state, view in result['views'] if view != 'form']
+            else:
+                result['views'] = form_view
+            result['res_id'] = invoices.id
+        else:
+            result = {'type': 'ir.actions.act_window_close'}
 
-        # action = self.env.ref('purchase.act_res_partner_2_supplier_invoices').read([])[0]
-        
-        # action['domain'] = [('id', '=', self.invoice_line_id.move_id.id)]
-
-        action = self.env["ir.actions.actions"]._for_xml_id("account.action_move_journal_line")
-        action['views'] = [(self.env.ref('account.view_move_form').id, 'form')]
-        action['res_id'] = self.invoice_line_id.move_id.id
-
-        # src/addons/account/models/account_move.py:3366
-        # def action_duplicate(self):
-        #     self.ensure_one()
-        #     action = self.env["ir.actions.actions"]._for_xml_id("account.action_move_journal_line")
-        #     action['context'] = dict(self.env.context)
-        #     action['context']['form_view_initial_mode'] = 'edit'
-        #     action['context']['view_no_maturity'] = False
-        #     action['views'] = [(self.env.ref('account.view_move_form').id, 'form')]
-        #     action['res_id'] = self.copy().id
-        #     return action
-        return action   
+        return result

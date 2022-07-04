@@ -7,4 +7,4 @@ from odoo import _, api, fields, models
 class AccountMoveLine(models.Model):
     _inherit = "account.move.line"
 
-    tsm_service_ids = fields.One2many('project.tsm.service', 'invoice_line_id', string='Servicio Asociado')
+    tsm_service_id = fields.Many2one('project.tsm.service', string='Servicio Asociado')
