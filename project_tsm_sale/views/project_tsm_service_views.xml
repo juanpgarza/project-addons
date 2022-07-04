@@ -14,7 +14,7 @@
                 <field name="so_line" />
             </field>
             <field name="product_template_id" position="attributes">
-                <attribute name="optional">hide</attribute>
+                <attribute name="optional">show</attribute>
             </field>
         </field>
     </record>
