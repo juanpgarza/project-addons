@@ -31,10 +31,10 @@ class ProjectTSMService(models.Model):
                                         domain="[('detailed_type','=','service')]",
                                         )
 
-    product_uom_qty = fields.Float(string="Cant. pedida",
+    product_uom_qty = fields.Float(string="Cantidad",
                                 )
 
-    qty_delivered = fields.Float(string="Cant. ejecutada",
+    qty_delivered = fields.Float(string="Entregado",
                                 tracking=True,
                                 default=0)
 
@@ -44,6 +44,8 @@ class ProjectTSMService(models.Model):
                             tracking=True,
                             # default=lambda self:self._default_user_id(),
                             )
+
+    partner_id = fields.Many2one(related='user_id.partner_id')
 
     delivered_date = fields.Date(string="Fecha ejecución")
 
