@@ -8,9 +8,11 @@ class InvoiceAddTsmService(models.TransientModel):
     _description = "Agregar servicios de terceros"
 
     account_move_id = fields.Many2one("account.move", string="Factura")
-    partner_id = fields.Many2one(related='account_move_id.partner_id')
+    partner_id = fields.Many2one(related='account_move_id.partner_id', string="Proveedor")
 
-    tsm_service_ids = fields.Many2many("project.tsm.service",domain="[('partner_id','=',partner_id),('state','=','approved')]")
+    tsm_service_ids = fields.Many2many("project.tsm.service",
+                                string="Servicios",
+                                domain="[('partner_id','=',partner_id),('state','=','approved')]")
 
     @api.model
     def default_get(self, field_names):

@@ -14,14 +14,17 @@
                 <button class="oe_stat_button" 
                         name="action_view_invoice" 
                         type="object" 
-                        icon="fa-pencil-square-o"><span class="o_stat_text">Factura de proveedor</span>
+                        icon="fa-pencil-square-o"
+                        attrs="{'invisible': [('qty_invoiced', '=', 0)]}"
+                        ><span class="o_stat_text">Factura de proveedor</span>
                 </button>
             </div>
 
-            <field name="qty_delivered" position="after">
+            <field name="user_id" position="after">
                     <field name="qty_invoiced" />
-                    <field name="qty_to_invoice" />                    
-                    <field name="invoice_status" />                    
+                    <field name="qty_to_invoice" />
+                    <field name="invoice_status" />
+                    <field name="partner_id" />
                     <field name="invoice_line_ids" invisible="1">
                         <tree create="false" edit="false" delete="false">
                             <field name="quantity" />
@@ -40,7 +43,10 @@
         <field name="arch" type="xml">
 
             <field name="qty_delivered" position="after">
-                <field name="qty_invoiced" />
+                <field name="qty_invoiced" optional="show" />
+                <field name="qty_to_invoice" optional="show" />
+                <field name="invoice_status" optional="show" />
+                <field name="partner_id" optional="show" />
             </field>
 
         </field>

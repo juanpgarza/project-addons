@@ -7,11 +7,7 @@ from odoo.tools.float_utils import float_compare, float_is_zero, float_round
 
 class ProjectTSMService(models.Model):
     _inherit = "project.tsm.service"
-
-    account_stage = fields.Selection(selection_add=[
-                    ("invoiced", "Facturado"),
-        ])
-     
+   
     invoice_line_ids = fields.One2many('account.move.line', 'tsm_service_id', string='Línea de factura', readonly=True, copy=False)
     qty_invoiced = fields.Float(compute='_compute_qty_invoiced', string="Facturado", digits='Product Unit of Measure', store=True)
     qty_to_invoice = fields.Float(compute='_compute_qty_invoiced', string='A facturar', store=True, readonly=True,
@@ -25,6 +21,8 @@ class ProjectTSMService(models.Model):
         ('invoiced', 'Totalmente Facturado'),
     ], string='Estado de facturación', compute='_get_invoiced', store=True, readonly=True, copy=False, default='no',tracking=True,)
 
+    partner_id = fields.Many2one(related='user_id.partner_id', string="Proveedor")
+
     @api.depends('qty_to_invoice')
     def _get_invoiced(self):
         precision = self.env['decimal.precision'].precision_get('Product Unit of Measure')
@@ -33,12 +31,12 @@ class ProjectTSMService(models.Model):
                 service.invoice_status = 'no'
                 continue
 
-            if not float_is_zero(service.qty_to_invoice, precision_digits=precision):
+            if service.qty_to_invoice > 0:
                 service.invoice_status = 'to invoice'
             else:
                 service.invoice_status = 'invoiced'
 
-    @api.depends('invoice_line_ids.move_id.state', 'invoice_line_ids.quantity')
+    @api.depends('invoice_line_ids.move_id.state', 'invoice_line_ids.quantity','state')
     def _compute_qty_invoiced(self):
         for line in self:
             # compute qty_invoiced
