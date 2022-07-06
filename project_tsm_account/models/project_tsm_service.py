@@ -21,7 +21,7 @@ class ProjectTSMService(models.Model):
         ('invoiced', 'Totalmente Facturado'),
     ], string='Estado de facturación', compute='_compute_qty_invoiced', store=True, readonly=True, copy=False, default='no',tracking=True,)
 
-    partner_id = fields.Many2one(related='user_id.partner_id', string="Proveedor")
+    partner_id = fields.Many2one(related='user_id.partner_id', string="Proveedor", store=True)
 
     # @api.depends('qty_to_invoice')
     # def _get_invoiced(self):

@@ -43,13 +43,28 @@
         <field name="inherit_id" ref="project_tsm.project_task_service_view_tree" />        
         <field name="arch" type="xml">
 
-            <field name="qty_delivered" position="after">
+            <field name="state" position="after">
                 <field name="qty_invoiced" optional="show" />
                 <field name="qty_to_invoice" optional="show" />
                 <field name="invoice_status" optional="show" />
                 <field name="partner_id" optional="show" />
             </field>
 
+        </field>
+    </record>
+
+    <record id="project_task_service_view_filter" model="ir.ui.view">
+        <field name="name">project.tsm.service.select</field>
+        <field name="model">project.tsm.service</field>
+        <field name="arch" type="xml">
+            <search string="Buscar servicios">
+                <filter name="aprobado" string="Aprobado" domain="[('state','=','approved')]"/>
+                <separator/>
+                <filter name="para-facturar" string="Para facturar" domain="[('invoice_status','=','to invoice')]"/>                
+                <group expand="0" string="Group By">
+                    <filter string="Proveedor" name="proveedor" context="{'group_by':'partner_id'}"/>
+                </group>
+           </search>
         </field>
     </record>
 

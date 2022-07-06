@@ -26,22 +26,6 @@ class ProjectTSMService(models.Model):
                                     # readonly=True,    
                                         )
 
-    account_stage = fields.Selection([
-            ("review", "Pendiente de aprobación"),
-            ("approved", "Aprobado"),
-            # ("invoiced", "Facturado"),
-        ],
-        default="review",
-        string="Estado Facturación",
-        readonly=True,
-        tracking=True,
-        )
-
-    # @api.depends('task_id.sale_line_id', 'project_id.sale_line_id', 'employee_id', 'project_id.allow_billable')
-    # @api.depends('task_id.sale_line_id')
-    # def _compute_so_line(self):
-    #     return True
-
     @api.depends("so_line.product_template_id")
     def _compute_product_template_id(self):
         for rec in self:
