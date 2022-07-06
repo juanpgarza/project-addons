@@ -16,6 +16,7 @@
                         type="object" 
                         icon="fa-pencil-square-o"
                         attrs="{'invisible': [('qty_invoiced', '=', 0)]}"
+                        groups="account.group_account_invoice"
                         ><span class="o_stat_text">Factura de proveedor</span>
                 </button>
             </div>

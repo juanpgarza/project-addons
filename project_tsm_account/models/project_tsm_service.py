@@ -19,22 +19,22 @@ class ProjectTSMService(models.Model):
         ('no', 'Nada para facturar'),
         ('to invoice', 'Para facturar'),
         ('invoiced', 'Totalmente Facturado'),
-    ], string='Estado de facturación', compute='_get_invoiced', store=True, readonly=True, copy=False, default='no',tracking=True,)
+    ], string='Estado de facturación', compute='_compute_qty_invoiced', store=True, readonly=True, copy=False, default='no',tracking=True,)
 
     partner_id = fields.Many2one(related='user_id.partner_id', string="Proveedor")
 
-    @api.depends('qty_to_invoice')
-    def _get_invoiced(self):
-        precision = self.env['decimal.precision'].precision_get('Product Unit of Measure')
-        for service in self:
-            if service.state != 'approved':
-                service.invoice_status = 'no'
-                continue
+    # @api.depends('qty_to_invoice')
+    # def _get_invoiced(self):
+    #     precision = self.env['decimal.precision'].precision_get('Product Unit of Measure')
+    #     for service in self:
+    #         if service.state != 'approved':
+    #             service.invoice_status = 'no'
+    #             continue
 
-            if service.qty_to_invoice > 0:
-                service.invoice_status = 'to invoice'
-            else:
-                service.invoice_status = 'invoiced'
+    #         if service.qty_to_invoice > 0:
+    #             service.invoice_status = 'to invoice'
+    #         else:
+    #             service.invoice_status = 'invoiced'
 
     @api.depends('invoice_line_ids.move_id.state', 'invoice_line_ids.quantity','state')
     def _compute_qty_invoiced(self):
@@ -51,8 +51,13 @@ class ProjectTSMService(models.Model):
 
             if line.state == 'approved':
                 line.qty_to_invoice = line.qty_delivered - line.qty_invoiced
+                if line.qty_to_invoice > 0:
+                    line.invoice_status = 'to invoice'
+                else:
+                    line.invoice_status = 'invoiced'
             else:
                 line.qty_to_invoice = 0
+                line.invoice_status = 'no'
 
     def _get_invoice_lines(self):
         self.ensure_one()
