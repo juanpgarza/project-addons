@@ -10,3 +10,6 @@ class AccountMoveLine(models.Model):
     tsm_service_id = fields.Many2one('project.tsm.service', 
                             string='Servicio Asociado',
                             ondelete='restrict',)
+
+    sale_order_id = fields.Many2one(related='tsm_service_id.sale_order_id')
+    project_id = fields.Many2one(related='tsm_service_id.project_id')    
