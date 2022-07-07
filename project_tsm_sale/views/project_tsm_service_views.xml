@@ -11,7 +11,7 @@
         <field name="arch" type="xml">
 
             <field name="product_template_id" position="before">
-                <field name="so_line" />
+                <field name="so_line" optional="show" />
             </field>
             <field name="product_template_id" position="attributes">
                 <attribute name="optional">show</attribute>

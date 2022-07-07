@@ -8,7 +8,7 @@ class SaleOrder(models.Model):
     _inherit = "sale.order"
 
     tsm_service_count = fields.Float(string='Servicios asociados', compute='_compute_tsm_service_count')
-
+    tsm_service_ids = fields.One2many("project.tsm.service",inverse_name="sale_order_id",string="Servicios")
 
     def _compute_tsm_service_count(self):
         for order in self:

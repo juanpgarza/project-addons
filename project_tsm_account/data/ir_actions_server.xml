@@ -1,10 +1,4 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <record id="action_server_create_bill" model="ir.actions.server">
-        <field name="name">Crear factura</field>
-        <field name="model_id" ref="project_tsm.model_project_tsm_service" />
-        <field name="binding_model_id" ref="project_tsm.model_project_tsm_service" />
-        <field name="state">code</field>
-        <field name="code">action = records.action_create_bill()</field>
-    </record>
+
 </odoo>

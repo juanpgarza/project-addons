@@ -10,7 +10,7 @@ class ProjectTSMService(models.Model):
     _rec_name = "product_template_id"
     _inherit = ['mail.thread', 'mail.activity.mixin']
 
-    project_id = fields.Many2one(string='',related='task_id.project_id')
+    project_id = fields.Many2one(string='Proyecto',related='task_id.project_id')
 
     # def _default_user_id(self):
     #     import pdb; pdb.set_trace()

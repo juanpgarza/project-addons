@@ -11,11 +11,11 @@
             <tree string="Servicios" create="false">
                 <field name="task_id" />
                 <field name="product_template_id" />
-                <field name="product_uom_qty" />
-                <field name="qty_delivered" />
-                <field name="user_id" />
-                <field name="delivered_date" /> 
-                <field name="state" />
+                <field name="product_uom_qty" optional="show" />
+                <field name="qty_delivered" optional="show" />
+                <field name="user_id" optional="show" />
+                <field name="delivered_date" optional="show" /> 
+                <field name="state" optional="show" />
             </tree>
         </field>
     </record>

@@ -7,11 +7,7 @@ from odoo.tools.float_utils import float_compare, float_is_zero, float_round
 
 class ProjectTSMService(models.Model):
     _inherit = "project.tsm.service"
-
-    account_stage = fields.Selection(selection_add=[
-                    ("invoiced", "Facturado"),
-        ])
-     
+   
     invoice_line_ids = fields.One2many('account.move.line', 'tsm_service_id', string='Línea de factura', readonly=True, copy=False)
     qty_invoiced = fields.Float(compute='_compute_qty_invoiced', string="Facturado", digits='Product Unit of Measure', store=True)
     qty_to_invoice = fields.Float(compute='_compute_qty_invoiced', string='A facturar', store=True, readonly=True,
@@ -23,22 +19,24 @@ class ProjectTSMService(models.Model):
         ('no', 'Nada para facturar'),
         ('to invoice', 'Para facturar'),
         ('invoiced', 'Totalmente Facturado'),
-    ], string='Estado de facturación', compute='_get_invoiced', store=True, readonly=True, copy=False, default='no',tracking=True,)
+    ], string='Estado de facturación', compute='_compute_qty_invoiced', store=True, readonly=True, copy=False, default='no',tracking=True,)
 
-    @api.depends('qty_to_invoice')
-    def _get_invoiced(self):
-        precision = self.env['decimal.precision'].precision_get('Product Unit of Measure')
-        for service in self:
-            if service.state != 'approved':
-                service.invoice_status = 'no'
-                continue
+    partner_id = fields.Many2one(related='user_id.partner_id', string="Proveedor", store=True)
 
-            if not float_is_zero(service.qty_to_invoice, precision_digits=precision):
-                service.invoice_status = 'to invoice'
-            else:
-                service.invoice_status = 'invoiced'
+    # @api.depends('qty_to_invoice')
+    # def _get_invoiced(self):
+    #     precision = self.env['decimal.precision'].precision_get('Product Unit of Measure')
+    #     for service in self:
+    #         if service.state != 'approved':
+    #             service.invoice_status = 'no'
+    #             continue
 
-    @api.depends('invoice_line_ids.move_id.state', 'invoice_line_ids.quantity')
+    #         if service.qty_to_invoice > 0:
+    #             service.invoice_status = 'to invoice'
+    #         else:
+    #             service.invoice_status = 'invoiced'
+
+    @api.depends('invoice_line_ids.move_id.state', 'invoice_line_ids.quantity','state')
     def _compute_qty_invoiced(self):
         for line in self:
             # compute qty_invoiced
@@ -53,8 +51,13 @@ class ProjectTSMService(models.Model):
 
             if line.state == 'approved':
                 line.qty_to_invoice = line.qty_delivered - line.qty_invoiced
+                if line.qty_to_invoice > 0:
+                    line.invoice_status = 'to invoice'
+                else:
+                    line.invoice_status = 'invoiced'
             else:
                 line.qty_to_invoice = 0
+                line.invoice_status = 'no'
 
     def _get_invoice_lines(self):
         self.ensure_one()
