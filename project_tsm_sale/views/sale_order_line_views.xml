@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- 
+        Copyright 2022 juanpgarza - Juan Pablo Garza <juanp@juanpgarza.com>
+        License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). 
+    -->
+    <record id="view_order_form_tree" model="ir.ui.view">
+        <field name="name">sale.order.form</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form" />
+        <field name="arch" type="xml">
+
+            <xpath expr="//field[@name='order_line']/tree/field[@name='qty_delivered_method']" position="attributes">
+                <attribute name="invisible">0</attribute>
+                <attribute name="optional">hide</attribute>
+            </xpath>
+
+        </field>
+    </record>
+
+</odoo>

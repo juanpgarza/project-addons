@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- 
+        Copyright 2022 juanpgarza - Juan Pablo Garza <juanp@juanpgarza.com>
+        License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). 
+    -->
+    <record id="view_order_form" model="ir.ui.view">
+        <field name="name">sale.order.form</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form" />
+        <field name="arch" type="xml">
+
+            <div name="button_box" position="inside">
+                <field name="tsm_service_count" invisible="1"/>
+                <button class="oe_stat_button" 
+                        name="%(sale_project_task_service_action)d" 
+                        type="action" 
+                        attrs="{'invisible': [('tsm_service_count', '=', 0)]}"
+                        icon="fa-list"><span class="o_stat_text">Servicios</span>
+                </button>
+            </div>
+
+        </field>
+    </record>
+
+</odoo>

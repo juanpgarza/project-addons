@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<odoo>
+    <!-- 
+        Copyright 2022 juanpgarza - Juan Pablo Garza <juanp@juanpgarza.com>
+        License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+    -->
+
+    <record id="edit_project" model="ir.ui.view">
+        <field name="name">project.project.form</field>
+        <field name="model">project.project</field>
+        <field name="inherit_id" ref="project.edit_project"/>
+        <field name="arch" type="xml">
+            <div name="button_box" position="inside">
+                <button class="oe_stat_button" 
+                        name="%(project_project_service_action)d" 
+                        type="action" 
+                        icon="fa-list"><span class="o_stat_text">Servicios</span>
+                </button>
+            </div>            
+        </field>
+    </record>
+
+</odoo>

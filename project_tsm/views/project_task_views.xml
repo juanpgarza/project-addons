@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- 
+        Copyright 2022 juanpgarza - Juan Pablo Garza <juanp@juanpgarza.com>
+        License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). 
+    -->
+    <record id="view_task_form2" model="ir.ui.view">
+        <field name="name">project.task.form.service</field>
+        <field name="model">project.task</field>
+        <field name="inherit_id" ref="project.view_task_form2" />
+        <field name="arch" type="xml">
+            <div name="button_box" position="inside">
+                <button class="oe_stat_button" 
+                        name="%(project_task_service_action)d" 
+                        type="action" 
+                        icon="fa-list"><span class="o_stat_text">Servicios</span>
+                </button>
+            </div>
+            <xpath expr="//notebook" position="inside">
+                            
+                <page string="Servicios">
+                    <field name="service_ids">
+                        <tree create="true" edit="true" delete="true" editable="bottom">
+                            <field name="product_template_id" />
+                            <field name="product_uom_qty" />
+                            <field name="qty_delivered" />
+                            <field name="user_id" />
+                            <field name="delivered_date" />
+                            <field name="state" />
+                        </tree>
+                    </field>
+                </page>            
+
+            </xpath>      
+        </field>
+    </record>
+
+</odoo>

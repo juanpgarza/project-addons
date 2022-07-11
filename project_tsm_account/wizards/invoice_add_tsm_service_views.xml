@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- 
+        Copyright 2022 juanpgarza - Juan Pablo Garza <juanp@juanpgarza.com>
+        License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). 
+    -->
+    <record id="view_add_tsm_service" model="ir.ui.view">
+        <field name="name">invoice.add.tsm.service.form</field>
+        <field name="model">invoice.add.tsm.service</field>
+        <field name="arch" type="xml">
+            <form string="Servicios">
+                <group>
+                    <field name="account_move_id" />
+                    <field name="partner_id" />
+                    <field name="tsm_service_ids"/>
+                </group>
+                <footer>
+                    <button
+                        name="create_items"
+                        string="Agregar"
+                        type="object"
+                        class="oe_highlight"
+                    />
+                    or
+                    <button string="Cancelar" class="oe_link" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+    
+    <record id="action_add_tsm_service" model="ir.actions.act_window">
+        <field name="name">Import Products</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">invoice.add.tsm.service</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_add_tsm_service" />
+        <field name="target">new</field>
+    </record>
+
+</odoo>
