@@ -12,7 +12,7 @@ class InvoiceAddTsmService(models.TransientModel):
 
     tsm_service_ids = fields.Many2many("project.tsm.service",
                                 string="Servicios",
-                                domain="[('partner_id','=',partner_id),('state','=','approved')]")
+                                domain="[('partner_id','=',partner_id),('state','=','approved'),('subcontracted','=',True)]")
 
     @api.model
     def default_get(self, field_names):

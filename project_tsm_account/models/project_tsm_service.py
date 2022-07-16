@@ -19,6 +19,7 @@ class ProjectTSMService(models.Model):
         ('no', 'Nada para facturar'),
         ('to invoice', 'Para facturar'),
         ('invoiced', 'Totalmente Facturado'),
+        ('na', 'No Aplica'),
     ], string='Estado de facturación', compute='_compute_qty_invoiced', store=True, readonly=True, copy=False, default='no',tracking=True,)
 
     partner_id = fields.Many2one(related='user_id.partner_id', string="Proveedor", store=True)
@@ -36,9 +37,15 @@ class ProjectTSMService(models.Model):
     #         else:
     #             service.invoice_status = 'invoiced'
 
-    @api.depends('invoice_line_ids.move_id.state', 'invoice_line_ids.quantity','state')
+    @api.depends('invoice_line_ids.move_id.state', 'invoice_line_ids.quantity','state','subcontracted')
     def _compute_qty_invoiced(self):
         for line in self:
+
+            # si es subcontrado, el estado de facturación deja de tener sentido
+            if not line.subcontracted:
+                line.invoice_status = 'na'
+                continue
+
             # compute qty_invoiced
             qty = 0.0
             for inv_line in line._get_invoice_lines():

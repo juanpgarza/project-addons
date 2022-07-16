@@ -16,6 +16,7 @@
                 <field name="user_id" optional="show" />
                 <field name="delivered_date" optional="show" /> 
                 <field name="state" optional="show" />
+                <field name="subcontracted" optional="show" groups="project_tsm.group_tsm_subcontracted" />
             </tree>
         </field>
     </record>
@@ -37,6 +38,7 @@
                         <field name="qty_delivered" />
                         <field name="user_id" />
                         <field name="delivered_date" />
+                        <field name="subcontracted" optional="show" groups="project_tsm.group_tsm_subcontracted" />                        
                     </group>
                 </sheet>    
                 <div class="oe_chatter">
