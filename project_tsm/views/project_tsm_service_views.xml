@@ -66,4 +66,17 @@
         <field name="context">{'default_project_id': active_id}</field>
     </record>
 
+    <record id="task_service_action" model="ir.actions.act_window">
+        <field name="name">Servicios del projecto</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">project.tsm.service</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="menu_task_service" 
+    name="Servicios de terceros"
+    parent="project.menu_main_pm"
+    action="task_service_action"
+    sequence="10"/>
+
 </odoo>
