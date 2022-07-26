@@ -27,6 +27,7 @@
                             <field name="user_id" />
                             <field name="delivered_date" />
                             <field name="state" />
+                            <field name="subcontracted" optional="show" groups="project_tsm.group_tsm_subcontracted" />
                         </tree>
                     </field>
                 </page>            

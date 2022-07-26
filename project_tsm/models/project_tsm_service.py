@@ -60,6 +60,8 @@ class ProjectTSMService(models.Model):
         tracking=True,
         )
 
+    subcontracted = fields.Boolean('Subcontratado', default=True)
+
     # def write(self, vals):
     #     import pdb; pdb.set_trace()
     #     if 'user_id' in vals and not vals["user_id"]:
