@@ -16,7 +16,7 @@ class SaleOrderLine(models.Model):
         # import pdb; pdb.set_trace()
         for rec in self.filtered(lambda sol: sol.qty_delivered_method == 'project_task'):
             # import pdb; pdb.set_trace()
-            rec.qty_delivered = sum(rec.order_id.tsm_service_ids.filtered(lambda x: x.so_line == rec and x.state == 'approved').mapped("qty_delivered"))
+            rec.qty_delivered = sum(rec.order_id.tsm_service_ids.filtered(lambda x: x.so_line == rec).mapped("qty_delivered"))
 
     # src/addons/sale_timesheet/models/sale_order.py:203
     # src/addons/sale/models/sale_order_line.py:323

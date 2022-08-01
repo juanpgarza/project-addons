@@ -22,6 +22,8 @@ class ProjectTSMService(models.Model):
                     domain="[('is_service', '=', True), ('is_expense', '=', False), ('state', 'in', ['sale', 'done']), ('order_id', '=', sale_order_id)]",
                     )
 
+    qty_pending = fields.Float(string="Restante", compute="_compute_qty_pending")
+
     product_uom_qty = fields.Float(related='so_line.product_uom_qty',
                                     # readonly=True,    
                                         )
@@ -39,3 +41,8 @@ class ProjectTSMService(models.Model):
             self.product_template_id = False
         # import pdb; pdb.set_trace()
         # return True
+
+    @api.depends("so_line.product_uom_qty", "so_line.qty_delivered")
+    def _compute_qty_pending(self):
+        for rec in self:
+            rec.qty_pending = rec.so_line.product_uom_qty - rec.so_line.qty_delivered

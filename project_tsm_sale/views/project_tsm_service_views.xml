@@ -16,6 +16,9 @@
             <field name="product_template_id" position="attributes">
                 <attribute name="optional">show</attribute>
             </field>
+            <field name="qty_delivered" position="after">
+                <field name="qty_pending" optional="show" />
+            </field>
         </field>
     </record>
 
@@ -28,6 +31,9 @@
             <field name="product_template_id" position="before">
                 <field name="sale_order_id" />
                 <field name="so_line" />
+            </field>
+            <field name="qty_delivered" position="after">
+                <field name="qty_pending" />
             </field>
         </field>
     </record>
