@@ -15,7 +15,8 @@
                 <field name="qty_delivered" optional="show" />
                 <field name="user_id" optional="show" />
                 <field name="delivered_date" optional="show" /> 
-                <field name="state" optional="show" />
+                <field name="state" optional="show" />                
+                <field name="note" optional="show" />
                 <field name="subcontracted" optional="show" groups="project_tsm.group_tsm_subcontracted" />
             </tree>
         </field>
@@ -34,11 +35,12 @@
                     <group>
                         <field name="task_id" />
                         <field name="product_template_id" />
-                        <field name="product_uom_qty" />
-                        <field name="qty_delivered" />
+                        <field name="product_uom_qty" />                        
                         <field name="user_id" />
+                        <field name="qty_delivered" />
                         <field name="delivered_date" />
-                        <field name="subcontracted" optional="show" groups="project_tsm.group_tsm_subcontracted" />                        
+                        <field name="note" />
+                        <field name="subcontracted" groups="project_tsm.group_tsm_subcontracted" />                        
                     </group>
                 </sheet>    
                 <div class="oe_chatter">
@@ -60,7 +62,7 @@
     </record>
 
     <record id="project_project_service_action" model="ir.actions.act_window">
-        <field name="name">Servicios del projecto</field>
+        <field name="name">Servicios del proyecto</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">project.tsm.service</field>
         <field name="view_mode">tree,form</field>
@@ -69,7 +71,7 @@
     </record>
 
     <record id="task_service_action" model="ir.actions.act_window">
-        <field name="name">Servicios del projecto</field>
+        <field name="name">Servicios del proyecto</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">project.tsm.service</field>
         <field name="view_mode">tree,form</field>

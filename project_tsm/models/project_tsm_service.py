@@ -10,7 +10,9 @@ class ProjectTSMService(models.Model):
     _rec_name = "product_template_id"
     _inherit = ['mail.thread', 'mail.activity.mixin']
 
-    project_id = fields.Many2one(string='Proyecto',related='task_id.project_id')
+    project_id = fields.Many2one(string='Proyecto',related='task_id.project_id', store=True)
+
+    date_deadline = fields.Date(related='task_id.date_deadline')
 
     # def _default_user_id(self):
     #     import pdb; pdb.set_trace()
@@ -31,10 +33,10 @@ class ProjectTSMService(models.Model):
                                         domain="[('detailed_type','=','service')]",
                                         )
 
-    product_uom_qty = fields.Float(string="Cantidad",
+    product_uom_qty = fields.Float(string="Pedido",
                                 )
 
-    qty_delivered = fields.Float(string="Entregado",
+    qty_delivered = fields.Float(string="Ejecutado",
                                 tracking=True,
                                 default=0)
 
@@ -47,11 +49,14 @@ class ProjectTSMService(models.Model):
 
     partner_id = fields.Many2one(related='user_id.partner_id')
 
-    delivered_date = fields.Date(string="Fecha ejecución")
+    delivered_date = fields.Date(string="Fecha ejecución", 
+                    help="La fecha de ejecución se muestra en rojo "
+                    "cuando la fecha de ejecución informada es posterior "
+                    "a la fecha límite de la tarea o cuando esta última no fue informada",)
 
     state = fields.Selection([
-            ("draft", "Pendiente de realizar"),
-            ("done", "Realizado"),
+            ("draft", "Pendiente"),
+            ("done", "Revisado"),
             ("approved", "Aprobado"),
         ],
         default="draft",
@@ -62,21 +67,7 @@ class ProjectTSMService(models.Model):
 
     subcontracted = fields.Boolean('Subcontratado', default=True)
 
-    # def write(self, vals):
-    #     import pdb; pdb.set_trace()
-    #     if 'user_id' in vals and not vals["user_id"]:
-    #         vals["user_id"] = self.task_id.user_ids[0]
-
-    #     res = super(ProjectTSMService, self).write(vals)
-
-    #     return res
-
-    @api.model
-    def create(self, vals):
-        service_id = super(ProjectTSMService, self).create(vals)
-        if not service_id.user_id:
-            service_id.user_id = service_id.task_id.user_ids[0]
-        return service_id
+    note = fields.Text(string="Observaciones")
 
     def action_set_draft(self):
         for rec in self:

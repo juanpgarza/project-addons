@@ -10,3 +10,12 @@ class ProjectTask(models.Model):
     service_ids = fields.One2many(comodel_name="project.tsm.service",
                                 inverse_name="task_id",
                                 string="Servicios")
+    
+    assigned_user_id = fields.Many2one(comodel_name="res.users",compute="_compute_assigned_user_id")
+
+    def _compute_assigned_user_id(self):
+        for rec in self:
+            if rec.user_ids:
+                rec.assigned_user_id = rec.user_ids[0]            
+            else:
+                rec.assigned_user_id = False
