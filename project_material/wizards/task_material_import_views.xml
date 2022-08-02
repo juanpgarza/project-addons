@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- 
+        Copyright 2022 juanpgarza - Juan Pablo Garza <juanp@juanpgarza.com>
+        License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). 
+    -->
+    <record id="project_task_material_import_view" model="ir.ui.view">
+        <field name="name">task.material.import.wizard.form</field>
+        <field name="model">task.material.import.wizard</field>
+        <field name="arch" type="xml">
+            <form>
+                <group>
+                    <group>
+                        <field name="excel_file_for_import" filename="file_name" required="1"/>
+                        <field name="file_name" invisible="1"/>
+                        <!-- <field name="project_category_enable" invisible="1"/> -->
+                        <field name="project_id" invisible="1"/>
+                        <!-- <field name="task_id" domain="[('project_id', '=', project_id)]" /> -->
+                    </group>
+                </group>
+                <footer>
+                    <button type="object" name="do_import"
+                    string="Aceptar" class="oe_highlight" />
+                    <button special="cancel" string="Cancelar"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_project_task_material_import_wizard" model="ir.actions.act_window">
+        <field name="name">Importación de productos</field>
+        <field name="res_model">task.material.import.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="project_task_material_import_view"/>
+        <field name="target">new</field>
+        <field name="binding_model_id" ref="project.model_project_project" />
+    </record>
+
+</odoo>
