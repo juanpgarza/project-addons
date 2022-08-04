@@ -46,6 +46,7 @@ class ProjectTSMService(models.Model):
                             tracking=True,
                             # default=lambda self:self._default_user_id(),
                             )
+    user_ids = fields.Many2many(related='task_id.user_ids')
 
     partner_id = fields.Many2one(related='user_id.partner_id')
 

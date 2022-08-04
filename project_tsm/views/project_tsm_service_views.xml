@@ -12,9 +12,12 @@
                 <field name="task_id" />
                 <field name="product_template_id" />
                 <field name="product_uom_qty" optional="show" />
+                <field name="user_id" decoration-danger="not user_id in user_ids"/>
+                <field name="user_ids" />                
                 <field name="qty_delivered" optional="show" />
                 <field name="user_id" optional="show" />
-                <field name="delivered_date" optional="show" /> 
+                <field name="date_deadline" invisible="1" />
+                <field name="delivered_date" optional="show" decoration-danger="not date_deadline or delivered_date&gt;date_deadline"/>
                 <field name="state" optional="show" />                
                 <field name="note" optional="show" />
                 <field name="subcontracted" optional="show" groups="project_tsm.group_tsm_subcontracted" />
