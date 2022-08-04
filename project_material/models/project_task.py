@@ -4,11 +4,11 @@
 from odoo import fields, models
 
 
-class ProjectProject(models.Model):
-    _inherit = "project.project"
+class ProjectTask(models.Model):
+    _inherit = "project.task"
 
     material_ids = fields.One2many(
         comodel_name="project.material",
-        inverse_name="project_id",
-        string="Material usado en el proyecto",
+        inverse_name="task_id",
+        string="Material usado en la tarea",
     )

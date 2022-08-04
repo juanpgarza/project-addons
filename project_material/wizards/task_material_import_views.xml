@@ -28,7 +28,7 @@
     </record>
 
     <record id="action_project_task_material_import_wizard" model="ir.actions.act_window">
-        <field name="name">Importación de productos</field>
+        <field name="name">Importación de materiales</field>
         <field name="res_model">task.material.import.wizard</field>
         <field name="view_mode">form</field>
         <field name="view_id" ref="project_task_material_import_view"/>
