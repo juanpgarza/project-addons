@@ -2,7 +2,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo import models, fields, api, _
-from odoo.exceptions import UserError, Warning
+from odoo.exceptions import UserError, ValidationError, Warning
 import base64
 from io import BytesIO
 from xlrd import open_workbook
@@ -46,6 +46,9 @@ class TaskMaterialImport(models.TransientModel):
             cantidad = sheet.cell(i, 2).value
 
             producto = self.env["product.template"].search([("default_code","=", default_code)])
+
+            if not producto:
+                raise ValidationError("No existe un producto con Referencia Interna {}".format(default_code))
 
             val = {
                 # 'task_id': task_id.id,

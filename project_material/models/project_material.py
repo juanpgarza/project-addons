@@ -21,6 +21,8 @@ class ProjectMaterial(models.Model):
         comodel_name="product.product", string="Producto", required=True
     )
     quantity = fields.Float("Cantidad")
+    qty_available = fields.Float("Cantidad a mano", related='product_id.qty_available')
+    virtual_available = fields.Float("Cantidad pronosticada", related='product_id.virtual_available')    
 
     @api.constrains("quantity")
     def _check_quantity(self):
