@@ -24,7 +24,8 @@
                         <tree create="true" edit="true" delete="true" editable="bottom">
                             <field name="product_template_id" />
                             <field name="product_uom_qty" />                            
-                            <field name="user_id" />
+                            <field name="user_id" decoration-danger="not user_id in user_ids"/>
+                            <field name="user_ids" />
                             <field name="qty_delivered" />
                             <field name="date_deadline" invisible="1" />
                             <field name="delivered_date" decoration-danger="not date_deadline or delivered_date&gt;date_deadline"/>
