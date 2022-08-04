@@ -38,14 +38,18 @@ class InvoiceAddTsmService(models.TransientModel):
             move_id = self.account_move_id
             seller = product_id.seller_ids.filtered(lambda x: x.name == move_id.partner_id)
 
-            product_taxes = product_id.supplier_taxes_id.filtered(lambda x: x.company_id.id == move_id.company_id)
+            product_taxes = product_id.supplier_taxes_id.filtered(lambda x: x.company_id.id == move_id.company_id.id)
             taxes = move_id.fiscal_position_id.map_tax(product_taxes)
 
-            price_unit = self.env['account.tax']._fix_tax_included_price_company(
-                seller.price, product_taxes, taxes, move_id.company_id) if seller else 0.0
-            if price_unit and seller and move_id.currency_id and seller.currency_id != move_id.currency_id:
-                price_unit = seller.currency_id._convert(
-                    price_unit, move_id.currency_id, move_id.company_id, move_id.date or fields.Date.today())
+            # Con este código lo toma de las tarifas de los proveedores
+            # price_unit = self.env['account.tax']._fix_tax_included_price_company(
+            #     seller.price, product_taxes, taxes, move_id.company_id) if seller else 0.0
+            # if price_unit and seller and move_id.currency_id and seller.currency_id != move_id.currency_id:
+            #     price_unit = seller.currency_id._convert(
+            #         price_unit, move_id.currency_id, move_id.company_id, move_id.date or fields.Date.today())
+            
+            # Con este código, toma el precio de costo (standard_price)
+            price_unit = product_id.standard_price
 
             vals_1 = {
                 'product_id': product_id.id,
