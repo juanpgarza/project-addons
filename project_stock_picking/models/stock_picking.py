@@ -21,6 +21,12 @@ class StockPicking(models.Model):
     #                         domain="['|',('partner_id','child_of',parent_partner_id),('partner_id','=',partner_id)]")
 
     project_id = fields.Many2one('project.project', string='Proyecto') # , readonly=True
+    task_id = fields.Many2one('project.task', 
+                                string='Tarea', 
+                                domain="[('project_id', '=', project_id)]", 
+                                compute='_compute_task_id', 
+                                readonly=False, 
+                                store=True)
 
     # @api.depends("partner_id")
     # @api.onchange('partner_id')
@@ -46,3 +52,9 @@ class StockPicking(models.Model):
     #         # dominio = "[('partner_id','=',self.partner_id.id)]"
 
     #     # self.project_id = self.env['project.project'].search(dominio)
+
+    @api.depends('project_id')
+    def _compute_task_id(self):
+        for rec in self:
+            if rec.project_id != rec.task_id.project_id:
+                rec.task_id = False
