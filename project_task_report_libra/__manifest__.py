@@ -13,6 +13,7 @@
         "project",
         "project_task_checklist",
         "project_task_code",
+        "project_tsm",
         ],
     "data": [
         "views/project_task_report.xml",

@@ -95,6 +95,38 @@
                                 </tr>
                             </tbody>
                         </table>
+                        <hr/>
+                        <t t-if="o.service_ids">                        
+                            <h5>Servicios</h5>
+                            <table class="table table-sm o_main_table">
+                                <thead>
+                                    <tr>
+                                        <th class="text-left">
+                                            <strong>Servicio</strong>
+                                        </th>
+                                        <th class="text-center">
+                                            <strong>Ejecutar</strong>
+                                        </th>
+                                        <th class="text-left">
+                                            <strong>Observaciones</strong>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr t-foreach="o.service_ids" t-as="line">
+                                        <td class="text-left">
+                                            <span t-field="line.product_template_id.name"/>
+                                        </td>
+                                        <td class="text-center">
+                                            <span t-field="line.qty_delivered"/>
+                                        </td>
+                                        <td class="text-left">
+                                            <span t-field="line.note"/>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </t>
                         <br/>
                         <br/>
                         <br/>
