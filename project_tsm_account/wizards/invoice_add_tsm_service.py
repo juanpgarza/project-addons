@@ -65,6 +65,12 @@ class InvoiceAddTsmService(models.TransientModel):
             # necesario el check_move_validity=False (sino da error)
             aml_new = aml.with_context(check_move_validity=False).create(vals_1)
             #import pdb; pdb.set_trace()
+            
+            taxes = aml_new._get_computed_taxes()
+            if taxes and aml_new.move_id.fiscal_position_id:
+                taxes = aml_new.move_id.fiscal_position_id.map_tax(taxes)
+            aml_new.tax_ids = taxes
+
             aml_new._onchange_price_subtotal()
             aml_new._onchange_mark_recompute_taxes()
    
