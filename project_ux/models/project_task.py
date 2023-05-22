@@ -10,3 +10,5 @@ class Projecttask(models.Model):
     task_code = fields.Char("Código", copy=True)
 
     supervisor_user_id = fields.Many2one('res.users', string='Supervisor', tracking=True)
+
+    parent_project_id = fields.Many2one(string='Proyecto',comodel_name='project.project', related='parent_id.project_id')
