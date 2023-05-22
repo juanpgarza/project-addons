@@ -4,7 +4,7 @@
 {
     "name": "Project UX",
     "summary": "Project ux",
-    "version": "15.0.1.0.0",
+    "version": "15.0.1.1.0",
     "category": "Project",
     "website": "https://github.com/juanpgarza/project-addons",
     "author": "juanpgarza",

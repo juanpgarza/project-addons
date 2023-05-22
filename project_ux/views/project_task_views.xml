@@ -15,6 +15,9 @@
             <field name="user_ids" position="after">
                 <field name="supervisor_user_id" class="o_task_user_field"/>
                 <field name="task_code" />    
+            </field>
+            <field name="parent_id" position="before" attrs="{'invisible': ['|', ('allow_subtasks', '=', False), ('parent_id', '=', False)]}">
+                <field name="parent_project_id"/>
             </field>       
         </field>
     </record>
