@@ -14,7 +14,8 @@
                 <field name="quantity" />
                 <field name="qty_available" optional="show" decoration-danger="virtual_available &lt; 0" decoration-warning="virtual_available == 0" decoration-bf="1" />
                 <field name="virtual_available" optional="show" decoration-danger="virtual_available &lt; 0" decoration-warning="virtual_available == 0" />
-                <field name="task_id" />                
+                <field name="task_id" />
+                <field name="added" />                
             </tree>
         </field>
     </record>

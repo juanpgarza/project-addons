@@ -23,6 +23,7 @@ class ProjectMaterial(models.Model):
     quantity = fields.Float("Cantidad")
     qty_available = fields.Float("Cantidad a mano", related='product_id.qty_available')
     virtual_available = fields.Float("Cantidad pronosticada", related='product_id.virtual_available')    
+    added = fields.Boolean("Agregado")
 
     @api.constrains("quantity")
     def _check_quantity(self):
