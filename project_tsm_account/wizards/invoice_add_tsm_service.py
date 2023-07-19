@@ -60,6 +60,7 @@ class InvoiceAddTsmService(models.TransientModel):
                 'move_id': move_id.id,
                 'account_id': service.product_template_id.property_account_expense_id.id or service.product_template_id.categ_id.property_account_expense_categ_id.id,              
                 'tsm_service_id': service.id,
+                'analytic_account_id': service.project_id.analytic_account_id.id,
             }
             # src/addons/purchase/models/account_invoice.py:54
             # necesario el check_move_validity=False (sino da error)
