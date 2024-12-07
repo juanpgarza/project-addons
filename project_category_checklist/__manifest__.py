@@ -16,5 +16,5 @@
         'views/project_task_views.xml',
         'wizard/task_type_checklist_wizard_view.xml',        
         ],
-    "installable": True,
+    "installable": False,
 }

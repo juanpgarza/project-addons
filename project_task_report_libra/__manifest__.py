@@ -18,6 +18,6 @@
     "data": [
         "views/project_task_report.xml",
         ],
-    "installable": True,
+    "installable": False,
     "maintainers": ["juanpgarza"],    
 }

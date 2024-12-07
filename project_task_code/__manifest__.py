@@ -18,7 +18,7 @@
         "data/task_sequence.xml",
         "views/project_view.xml",
     ],
-    "installable": True,
+    "installable": False,
     "pre_init_hook": "pre_init_hook",
     "post_init_hook": "post_init_hook",
 }

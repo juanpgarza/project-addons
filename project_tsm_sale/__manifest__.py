@@ -23,6 +23,6 @@
         "views/sale_order_views.xml",        
         'security/ir.model.access.csv',        
         ],
-    "installable": True,
+    "installable": False,
     "maintainers": ["juanpgarza"],    
 }
