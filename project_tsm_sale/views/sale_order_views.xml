@@ -15,7 +15,7 @@
                 <button class="oe_stat_button" 
                         name="%(sale_project_task_service_action)d" 
                         type="action" 
-                        attrs="{'invisible': [('tsm_service_count', '=', 0)]}"
+                        invisible="tsm_service_count == 0"
                         icon="fa-list"><span class="o_stat_text">Servicios</span>
                 </button>
             </div>
