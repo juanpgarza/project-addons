@@ -4,13 +4,14 @@
 {
     "name": "Project Material",
     "summary": "Asignar materiales a proyectos y tareas",
-    "version": "15.0.1.1.0",
+    "version": "17.0.1.0.0",
     "category": "Project",
     "website": "https://github.com/juanpgarza/project-addons",
     "author": "juanpgarza",
     "license": "AGPL-3",
     "depends": [
         "project",
+        "stock",
         ],
     "data": [
         "views/project_material_views.xml",        
@@ -19,5 +20,5 @@
         "wizards/task_material_import_views.xml",
         "security/ir.model.access.csv",        
         ],
-    "installable": False,
+    "installable": True,
 }

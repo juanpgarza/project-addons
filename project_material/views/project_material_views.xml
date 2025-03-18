@@ -9,7 +9,7 @@
         <field name="model">project.material</field>
         <field name="arch" type="xml">
             <tree string="Material" editable="bottom" multi_edit="1" >
-                <field name="project_id" invisible="1" />
+                <field name="project_id" column_invisible="True" />
                 <field name="product_id" />
                 <field name="quantity" />
                 <field name="qty_available" optional="show" decoration-danger="virtual_available &lt; 0" decoration-warning="virtual_available == 0" decoration-bf="1" />
