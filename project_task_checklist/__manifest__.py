@@ -4,7 +4,7 @@
 {
     "name": "Project Task Checklist",
     "summary": "",
-    "version": "15.0.1.0.0",
+    "version": "17.0.1.0.0",
     "category": "Project",
     "website": "https://github.com/juanpgarza/project-addons",
     "author": "juanpgarza",
@@ -16,5 +16,5 @@
         'views/project_task_views.xml',
         'views/project_project_views.xml',        
         ],
-    "installable": False,
+    "installable": True,
 }
