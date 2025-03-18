@@ -12,7 +12,7 @@ class ProjectTSMService(models.Model):
 
     project_id = fields.Many2one(string='Proyecto',related='task_id.project_id', store=True)
 
-    date_deadline = fields.Date(related='task_id.date_deadline')
+    date_deadline = fields.Datetime(related='task_id.date_deadline')
 
     # def _default_user_id(self):
     #     import pdb; pdb.set_trace()

@@ -16,7 +16,7 @@
                 <field name="user_ids" />                
                 <field name="qty_delivered" optional="show" />
                 <field name="user_id" optional="show" />
-                <field name="date_deadline" invisible="1" />
+                <field name="date_deadline" column_invisible="True" />
                 <field name="delivered_date" optional="show" decoration-danger="not date_deadline or delivered_date&gt;date_deadline"/>
                 <field name="state" optional="show" />                
                 <field name="note" optional="show" />
