@@ -4,7 +4,7 @@
 {
     "name": "Project TSM Account",
     "summary": "Project TSM Account",
-    "version": "15.0.1.1.0",
+    "version": "17.0.1.0.0",
     "category": "Project",
     "website": "https://github.com/juanpgarza/project-addons",
     "author": "juanpgarza",
@@ -17,11 +17,10 @@
         ],
     "data": [
         "wizards/invoice_add_tsm_service_views.xml",
-        "views/account_move_views.xml",        
-        "data/ir_actions_server.xml",        
+        "views/account_move_views.xml",
         "views/project_tsm_service_views.xml",
         'security/ir.model.access.csv',        
         ],
-    "installable": False,
+    "installable": True,
     "maintainers": ["juanpgarza"],    
 }
