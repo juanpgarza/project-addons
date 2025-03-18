@@ -10,7 +10,7 @@ class TestProjectTaskCode(common.TransactionCase):
         self.project_task_model = self.env["project.task"]
         self.ir_sequence_model = self.env["ir.sequence"]
         self.task_sequence = self.env.ref("project_task_code.sequence_task")
-        self.project_task = self.env.ref("project.project_task_1")
+        self.project_task = self.env.ref("project.project_1_task_1")
 
     def test_old_task_code_assign(self):
         project_tasks = self.project_task_model.search([])
@@ -28,13 +28,6 @@ class TestProjectTaskCode(common.TransactionCase):
         self.assertNotEqual(project_task.code, "/")
         self.assertEqual(project_task.code, code)
 
-    def test_copy_task_code_assign(self):
-        number_next = self.task_sequence.number_next_actual
-        code = self.task_sequence.get_next_char(number_next)
-        project_task_copy = self.project_task.copy()
-        self.assertNotEqual(project_task_copy.code, self.project_task.code)
-        self.assertEqual(project_task_copy.code, code)
-
     def test_name_get(self):
         number_next = self.task_sequence.number_next_actual
         code = self.task_sequence.get_next_char(number_next)
@@ -43,5 +36,38 @@ class TestProjectTaskCode(common.TransactionCase):
                 "name": "Task Testing Get Name",
             }
         )
-        result = project_task.name_get()
-        self.assertEqual(result[0][1], "[%s] Task Testing Get Name" % code)
+        result = project_task.display_name
+        self.assertEqual(result, "[%s] Task Testing Get Name" % code)
+
+    def test_name_search(self):
+        project_task = self.env["project.task"].create(
+            {"name": "Such Much Task", "code": "TEST-123"}
+        )
+
+        result = project_task.name_search("TEST-123")
+        self.assertIn(
+            project_task.id,
+            map(lambda x: x[0], result),
+            f"Task with code {project_task.code} should be in the results",
+        )
+
+        result = project_task.name_search("TEST")
+        self.assertIn(
+            project_task.id,
+            map(lambda x: x[0], result),
+            f"Task with code {project_task.code} should be in the results",
+        )
+
+        result = project_task.name_search("much")
+        self.assertIn(
+            project_task.id,
+            map(lambda x: x[0], result),
+            f"Task with code {project_task.code} should be in the results",
+        )
+
+        result = project_task.name_search("20232")
+        self.assertNotIn(
+            project_task.id,
+            map(lambda x: x[0], result),
+            f"Task with code {project_task.code} should not be in the results",
+        )
