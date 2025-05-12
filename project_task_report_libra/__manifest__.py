@@ -14,6 +14,7 @@
         "project_task_checklist",
         "project_task_code",
         "project_tsm",
+        "project_ux",
         ],
     "data": [
         "views/project_task_report.xml",
