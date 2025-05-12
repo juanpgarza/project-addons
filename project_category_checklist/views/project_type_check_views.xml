@@ -8,7 +8,7 @@
         <field name="name">project.type.check.tree.view</field>
         <field name="model">project.type.check</field>
         <field name="arch" type="xml">
-            <tree string="check" editable="bottom" multi_edit="1" >
+            <tree editable="bottom" multi_edit="1" >
                 <field name="type_id" />            
                 <field name="description" />
                 <field name="done" />
