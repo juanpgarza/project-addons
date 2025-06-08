@@ -17,17 +17,17 @@
     </record>
 
     <record id="project_type_tree" model="ir.ui.view">
-        <field name="name">project.type.tree</field>
+        <field name="name">project.type.list</field>
         <field name="model">project.type</field>
         <field name="arch" type="xml">
-            <tree multi_edit="1" >    
+            <list multi_edit="1" >    
                 <field name="display_name" />
                 <field name="project_ok" />
                 <field name="task_ok" />
                 <field name="parent_id" />
                 <field name="sequence" />
                 <field name="description" />
-            </tree>
+            </list>
         </field>
     </record>
 
