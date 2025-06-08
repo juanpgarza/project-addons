@@ -4,7 +4,7 @@
 {
     "name": "Gestión de servicios en tareas",
     "summary": "Gestión de servicios en tareas",
-    "version": "17.0.1.0.0",
+    "version": "18.0.1.0.0",
     "category": "Project",
     "website": "https://github.com/juanpgarza/project-addons",
     "author": "juanpgarza",
@@ -20,6 +20,6 @@
         'security/ir.model.access.csv',        
         "views/project_project_views.xml",
         ],
-    "installable": False,
+    "installable": True,
     "maintainers": ["juanpgarza"],    
 }
