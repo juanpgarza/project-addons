@@ -15,7 +15,7 @@
         "project_tsm"
         ],
     "data": [
-        "views/product_template_views.xml",        
+        # "views/product_template_views.xml",        
         "views/project_tsm_service_views.xml", 
         "views/project_task_views.xml",
         "views/sale_order_line_views.xml",
