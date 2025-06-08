@@ -16,9 +16,9 @@ class ProjectTask(models.Model):
             'target': 'new'  
         }
 
-    @api.model
-    def create(self, vals):
-        res = super(ProjectTask,self).create(vals)
+    @api.model_create_multi
+    def create(self, vals_list):
+        res = super(ProjectTask,self).create(vals_list)
         if res.type_id:
             self.generate_type_checklist(res)
 
