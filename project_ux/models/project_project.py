@@ -15,7 +15,7 @@ class Project(models.Model):
     #     view = {
     #         "name": _("Details"),
     #         "view_type": "form",
-    #         "view_mode": "form,tree,kanban",
+    #         "view_mode": "form,list,kanban",
     #         "res_model": "project.project",
     #         "view_id": False,
     #         "type": "ir.actions.act_window",
