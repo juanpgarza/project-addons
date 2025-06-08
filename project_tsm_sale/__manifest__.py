@@ -4,7 +4,7 @@
 {
     "name": "Project TSM Sale",
     "summary": "Project TSM Sale",
-    "version": "17.0.1.0.0",
+    "version": "18.0.1.0.0",
     "category": "Project",
     "website": "https://github.com/juanpgarza/project-addons",
     "author": "juanpgarza",
@@ -22,6 +22,6 @@
         "views/sale_order_views.xml",        
         'security/ir.model.access.csv',        
         ],
-    "installable": False,
+    "installable": True,
     "maintainers": ["juanpgarza"],    
 }

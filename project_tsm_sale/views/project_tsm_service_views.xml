@@ -5,7 +5,7 @@
         License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). 
     -->
     <record id="project_task_service_view_tree" model="ir.ui.view">
-        <field name="name">project.tsm.service.tree.view</field>
+        <field name="name">project.tsm.service.list.view</field>
         <field name="model">project.tsm.service</field>
         <field name="inherit_id" ref="project_tsm.project_task_service_view_tree" />        
         <field name="arch" type="xml">
@@ -42,7 +42,7 @@
         <field name="name">Servicios de la pedido</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">project.tsm.service</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
         <field name="domain">[('sale_order_id', '=', active_id)]</field>
         <field name="context">{'default_sale_order_id': active_id}</field>
     </record>

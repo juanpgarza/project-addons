@@ -9,21 +9,21 @@
         <field name="model">project.task</field>
         <field name="inherit_id" ref="project_tsm.view_task_form2" />
         <field name="arch" type="xml">
-            <xpath expr="//field[@name='service_ids']/tree/field[@name='product_template_id']" position="before">
+            <xpath expr="//field[@name='service_ids']/list/field[@name='product_template_id']" position="before">
                 <field name="sale_order_id" required="1" column_invisible="True"/>
                 <field name="so_line" required="not product_template_id" />
             </xpath>
 
-            <xpath expr="//field[@name='service_ids']/tree/field[@name='product_uom_qty']" position="after">
+            <xpath expr="//field[@name='service_ids']/list/field[@name='product_uom_qty']" position="after">
                 <field name="qty_pending" decoration-danger="qty_pending&lt;0" />
             </xpath>
 
-            <xpath expr="//field[@name='service_ids']/tree/field[@name='product_template_id']" position="attributes">
+            <xpath expr="//field[@name='service_ids']/list/field[@name='product_template_id']" position="attributes">
                 <attribute name="readonly">so_line</attribute>
                 <attribute name="force_save">1</attribute>
             </xpath>
 
-            <xpath expr="//field[@name='service_ids']/tree/field[@name='user_id']" position="attributes">
+            <xpath expr="//field[@name='service_ids']/list/field[@name='user_id']" position="attributes">
                 <attribute name="required">1</attribute>
             </xpath>
 
