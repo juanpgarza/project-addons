@@ -12,7 +12,7 @@
         </field>
     </record>
     <record id="project_task_code_tree_view" model="ir.ui.view">
-        <field name="name">project.task.code.list</field>
+        <field name="name">project.task.code.tree</field>
         <field name="model">project.task</field>
         <field name="inherit_id" ref="project.view_task_tree2" />
         <field name="arch" type="xml">
@@ -21,7 +21,7 @@
             </field>
         </field>
     </record>
-    <record id="project_task_code_kanban_view" model="ir.ui.view">
+    <!-- <record id="project_task_code_kanban_view" model="ir.ui.view">
         <field name="name">project.task.code.kanban</field>
         <field name="model">project.task</field>
         <field name="inherit_id" ref="project.view_task_kanban" />
@@ -30,8 +30,8 @@
                 <field name="code" />
             </field>
         </field>
-    </record>
-    <record id="project_task_code_search_view" model="ir.ui.view">
+    </record> -->
+    <!-- <record id="project_task_code_search_view" model="ir.ui.view">
         <field name="name">project.task.code.search</field>
         <field name="model">project.task</field>
         <field name="inherit_id" ref="project.view_task_search_form" />
@@ -42,5 +42,5 @@
                 </attribute>
             </field>
         </field>
-    </record>
+    </record> -->
 </odoo>
