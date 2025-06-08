@@ -20,6 +20,6 @@
         'security/ir.model.access.csv',        
         "views/project_project_views.xml",
         ],
-    "installable": True,
+    "installable": False,
     "maintainers": ["juanpgarza"],    
 }

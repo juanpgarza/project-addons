@@ -16,5 +16,5 @@
         'views/project_task_views.xml',                
         'views/project_type_views.xml',
         ],
-    "installable": True,
+    "installable": False,
 }
