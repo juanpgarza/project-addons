@@ -30,7 +30,7 @@ class ProjectTSMService(models.Model):
     product_template_id = fields.Many2one(comodel_name="product.template",
                                         ondelete="restrict",
                                         string="Servicio",
-                                        domain="[('detailed_type','=','service')]",
+                                        # domain="[('detailed_type','=','service')]",
                                         )
 
     product_uom_qty = fields.Float(string="Pedido",
