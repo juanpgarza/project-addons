@@ -6,7 +6,7 @@
     -->
     <!-- List View -->
     <record model="ir.ui.view" id="view_task_enhancement_milestone_tree">
-        <field name="name">project.task.enhancement.milestone.tree</field>
+        <field name="name">project.task.enhancement.milestone.list</field>
         <field name="model">project.task</field>
         <field name="inherit_id" ref="project.view_task_tree2" />
         <field eval="2" name="priority" />

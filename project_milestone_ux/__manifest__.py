@@ -4,7 +4,7 @@
 {
     "name": "Project Milestone",
     "summary": "",
-    "version": "15.0.1.0.0",
+    "version": "18.0.1.0.0",
     "category": "Project",
     "website": "https://github.com/juanpgarza/project-addons",
     "author": "juanpgarza",
@@ -13,5 +13,5 @@
     "data": [
         'views/project_task_views.xml',
         ],
-    "installable": False,
+    "installable": True,
 }
