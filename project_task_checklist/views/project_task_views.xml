@@ -24,12 +24,12 @@
                     groups="project.group_project_user"
                 >
                     <field name="check_ids">
-                        <tree string="Checklist" editable="bottom">
+                        <list editable="bottom">
                             <field name='sequence' widget='handle'/>
                             <field name="description" />
                             <field name="done" />
                             <field name="comments" />                            
-                        </tree>
+                        </list>
                     </field>
                 </page>
             </xpath>
