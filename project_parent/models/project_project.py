@@ -34,7 +34,7 @@ class Project(models.Model):
             "type": "ir.actions.act_window",
             "view_type": "form",
             "name": "Children of %s" % self.name,
-            "view_mode": "tree,form,graph",
+            "view_mode": "list,form,graph",
             "res_model": "project.project",
             "target": "current",
             "context": ctx,
