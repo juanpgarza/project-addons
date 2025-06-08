@@ -34,7 +34,7 @@
         </field>
     </record>
     <!-- Kanban View -->
-    <record model="ir.ui.view" id="view_task_enhancement_milestone_kanban">
+    <!-- <record model="ir.ui.view" id="view_task_enhancement_milestone_kanban">
         <field name="name">project.task.enhancement.milestone.kanban</field>
         <field name="model">project.task</field>
         <field name="inherit_id" ref="project.view_task_kanban" />
@@ -45,9 +45,9 @@
                 </span>
             </xpath>
         </field>
-    </record>
+    </record> -->
     <!-- Search View -->
-    <record model="ir.ui.view" id="view_task_enhancement_search_milestone_form">
+    <!-- <record model="ir.ui.view" id="view_task_enhancement_search_milestone_form">
         <field name="name">project.task.enhancement.milestone.search.form</field>
         <field name="model">project.task</field>
         <field name="inherit_id" ref="project.view_task_search_form" />
@@ -64,5 +64,5 @@
                 />
             </filter>
         </field>
-    </record>
+    </record> -->
 </odoo>
