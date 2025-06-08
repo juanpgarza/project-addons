@@ -26,9 +26,9 @@
                     <field name="invoice_status" />
                     <field name="partner_id" />
                     <field name="invoice_line_ids" invisible="1">
-                        <tree create="false" edit="false" delete="false">
+                        <list create="false" edit="false" delete="false">
                             <field name="quantity" />
-                        </tree>
+                        </list>
                     </field>
                 
             </field>
@@ -37,7 +37,7 @@
     </record>
 
     <record id="project_task_service_view_tree" model="ir.ui.view">
-        <field name="name">project.tsm.service.tree.view</field>
+        <field name="name">project.tsm.service.list.view</field>
         <field name="model">project.tsm.service</field>
         <field name="inherit_id" ref="project_tsm.project_task_service_view_tree" />        
         <field name="arch" type="xml">
@@ -74,7 +74,7 @@
         <field name="name">Servicios de terceros</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">project.tsm.service</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">list,form</field>
         <field name="context">{"search_default_aprobado":1,"search_default_para_facturar":1,"search_default_subcontratado":1}</field>
     </record>
 
