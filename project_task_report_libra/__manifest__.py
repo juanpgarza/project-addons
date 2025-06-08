@@ -4,7 +4,7 @@
 {
     "name": "project_task_report_libra",
     "summary": "project_task_report_libra",
-    "version": "17.0.1.0.0",
+    "version": "18.0.1.0.0",
     "category": "Project",
     "website": "https://github.com/juanpgarza/project-addons",
     "author": "juanpgarza",
@@ -19,6 +19,6 @@
     "data": [
         "views/project_task_report.xml",
         ],
-    "installable": False,
+    "installable": True,
     "maintainers": ["juanpgarza"],    
 }
