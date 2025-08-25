@@ -18,29 +18,35 @@ class ProjectTask(models.Model):
 
     @api.model_create_multi
     def create(self, vals_list):
-        res = super(ProjectTask,self).create(vals_list)
-        if res.type_id:
-            self.generate_type_checklist(res)
+        tasks = super(ProjectTask, self).create(vals_list)
 
-        return res            
-   
-    @api.model
-    def generate_type_checklist(self, task_id):
+        # Itera sobre cada tarea recién creada
+        for task in tasks:
+            if task.type_id:
+                task.generate_type_checklist()
+        return tasks
 
+    def generate_type_checklist(self):
+        """Genera los checks del tipo asociado a la tarea"""
         task_check = self.env["project.task.check"]
 
-        checklist_items = self.env["project.type.check"].search([("type_id","=",task_id.type_id.id)])
-        
-        for rec in checklist_items:
-            vals = {
-                'project_id': task_id.project_id.id,
-                'task_id': task_id.id,
-                'description': rec.description,
-                'done': rec.done,
-                'comments': rec.comments
-            }
+        for task in self:  # ✅ iterar para evitar singleton
+            if not task.type_id:
+                continue
 
-            task_check.create(vals)
+            checklist_items = self.env["project.type.check"].search([
+                ("type_id", "=", task.type_id.id)
+            ])
+
+            for rec in checklist_items:
+                vals = {
+                    'project_id': task.project_id.id,
+                    'task_id': task.id,
+                    'description': rec.description,
+                    'done': rec.done,
+                    'comments': rec.comments,
+                }
+                task_check.create(vals)
 
     @api.onchange("type_id")
     def onchange_type_id(self):

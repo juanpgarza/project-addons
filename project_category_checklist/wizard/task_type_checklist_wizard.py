@@ -22,6 +22,6 @@ class TaskTypeChecklistWizard(models.TransientModel):
        
         self.task_id.type_id = self.type_id
 
-        self.task_id.generate_type_checklist(self.task_id)
+        self.task_id.generate_type_checklist()
 
         return
