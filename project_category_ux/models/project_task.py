@@ -18,9 +18,12 @@ class ProjectTask(models.Model):
 
     @api.returns('self', lambda value: value.id)
     def copy(self, default=None):
-        task = super(ProjectTask, self).copy(default)
-        task.type_id = self.type_id
-        return task
+        copied = self.browse()
+        for task in self:
+            new_task = super(ProjectTask, task).copy(default)
+            new_task.type_id = task.type_id.id
+            copied |= new_task
+        return copied
 
     def write(self, vals):
         res = super(ProjectTask, self).write(vals)
