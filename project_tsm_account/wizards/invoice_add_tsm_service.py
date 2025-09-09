@@ -60,7 +60,7 @@ class InvoiceAddTsmService(models.TransientModel):
                 'move_id': move_id.id,
                 'account_id': service.product_template_id.property_account_expense_id.id or service.product_template_id.categ_id.property_account_expense_categ_id.id,              
                 'tsm_service_id': service.id,
-                'analytic_distribution': service.project_id.analytic_distribution.id,
+                # 'analytic_distribution': service.project_id.analytic_distribution.id,
             }
             # src/addons/purchase/models/account_invoice.py:54
             # necesario el check_move_validity=False (sino da error)
@@ -72,7 +72,7 @@ class InvoiceAddTsmService(models.TransientModel):
                 taxes = aml_new.move_id.fiscal_position_id.map_tax(taxes)
             aml_new.tax_ids = taxes
 
-            aml_new._onchange_price_subtotal()
-            aml_new._onchange_mark_recompute_taxes()
+            # aml_new._onchange_price_subtotal()
+            # aml_new._onchange_mark_recompute_taxes()
    
         
