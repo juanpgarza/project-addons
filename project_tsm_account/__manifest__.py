@@ -4,7 +4,7 @@
 {
     "name": "Project TSM Account",
     "summary": "Project TSM Account",
-    "version": "18.0.1.0.0",
+    "version": "18.0.1.0.1",
     "category": "Project",
     "website": "https://github.com/juanpgarza/project-addons",
     "author": "juanpgarza",
