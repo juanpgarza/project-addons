@@ -36,7 +36,7 @@ class InvoiceAddTsmService(models.TransientModel):
             #     date=po.date_order and po.date_order.date(),
             #     uom_id=product_id.uom_po_id)
             move_id = self.account_move_id
-            seller = product_id.seller_ids.filtered(lambda x: x.name == move_id.partner_id)
+            # seller = product_id.seller_ids.filtered(lambda x: x.name == move_id.partner_id)
 
             product_taxes = product_id.supplier_taxes_id.filtered(lambda x: x.company_id.id == move_id.company_id.id)
             taxes = move_id.fiscal_position_id.map_tax(product_taxes)
